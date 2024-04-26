@@ -21,6 +21,11 @@ public class AudioController : MonoBehaviour
 
     public void PlayOneShot(AudioClip clip)
     {
+        if(clip == null)
+        {
+            Debug.LogError("Clip is null");
+            return;
+        }
         _source.PlayOneShot(clip);
     }
 }

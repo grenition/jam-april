@@ -9,10 +9,13 @@ public class SpeechSource : MonoBehaviour
     [SerializeField] private bool _playOneTime = true;
 
     private AudioController _controller;
+    private UISubtitles _subtitles;
     private bool _isPlayed = false;
+
     private void Start()
     {
         _controller = ServiceLocator.Get<AudioController>();
+        _subtitles = ServiceLocator.Get<UISubtitles>();
     }
 
     public void Play()
@@ -35,6 +38,7 @@ public class SpeechSource : MonoBehaviour
     private IEnumerator PlaySpeechClip(Speech.SpeechData speechData)
     {
         yield return new WaitForSeconds(speechData.startTime);
-        _controller.PlayOneShot(speechData.speechClip.clip);
+        _controller?.PlayOneShot(speechData.speechClip.clip);
+        _subtitles?.DrawSubtitles(speechData.speechClip.subtitles);
     }
 }
