@@ -81,7 +81,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   outlineSettings:
-    outlineColor: {r: 0.11464032, g: 0.11031505, b: 0.3490566, a: 1}
+    outlineColor: {r: 0.04644909, g: 0.04392132, b: 0.1981132, a: 1}
     outlineScale: 0.72
     depthThreshold: 100
     robertsCrossMultiplier: 153

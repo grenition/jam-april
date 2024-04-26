@@ -103,17 +103,17 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HatchingAmount1: 0.48
+    - _HatchingAmount1: 1.14
     - _HatchingAmount2: -1.28
-    - _HatchingScale1: 4.78
-    - _HatchingScale2: 4.5
+    - _HatchingScale1: 0.93
+    - _HatchingScale2: 1.33
     - _HatchingTIling: 3
     - _Metallic: 0
     - _MossEdgeThickness: 0.21
-    - _MossScale1: 1
-    - _MossScale2: 5.69
+    - _MossScale1: -0.01
+    - _MossScale2: 2.73
     - _MossTranslate1: 0.94
-    - _MossTranslate2: 5
+    - _MossTranslate2: 7.89
     - _MossYOffset: 0.38
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -132,8 +132,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MossColor: {r: 0.42038977, g: 0.6320754, b: 0.48176092, a: 0}
-    - _MossOutlineColor: {r: 0.28484336, g: 0.34905657, b: 0.34447438, a: 0}
+    - _MossColor: {r: 0.33726415, g: 0.45288184, b: 0.5, a: 0}
+    - _MossOutlineColor: {r: 0.38843897, g: 0.4056604, b: 0.40458405, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _StoneColor: {r: 0.37255248, g: 0.4466386, b: 0.49056602, a: 0}
   m_BuildTextureStacks: []
