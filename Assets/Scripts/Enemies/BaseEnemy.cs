@@ -1,3 +1,4 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -12,7 +13,8 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 
     private Vector3 _knockbackDirection = Vector3.zero;
     private float _knockbackStrength = 0;
-    private CharacterController _controller;
+
+    public CharacterController Controller { get; private set; }
 
     public float Health { get; protected set; }
 
@@ -22,7 +24,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
     protected virtual void Awake()
     {
         Health = MaxHealth;
-        _controller = GetComponent<CharacterController>();
+        Controller = GetComponent<CharacterController>();
     }
 
     public void Knockback(Vector3 direction)
@@ -62,18 +64,19 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 
     public virtual void Die()
     {
+        StopAllCoroutines();
         Destroy(gameObject);
     }
 
     protected virtual void Update()
     {
-        if(_gravityObject.VelocityY != 0)
+        if (_gravityObject.VelocityY != 0)
         {
-            _controller.Move(Vector3.up * _gravityObject.VelocityY * Time.deltaTime);
+            Controller.Move(Vector3.up * _gravityObject.VelocityY * Time.deltaTime);
         }
         if(_knockbackStrength > 0)
         {
-            _controller.Move(_knockbackDirection * _knockbackStrength * Time.deltaTime);
+            Controller.Move(_knockbackDirection * _knockbackStrength * Time.deltaTime);
             if(_gravityObject.OnLand)
                 _knockbackStrength -= KNOCKBACK_SLOWDOWN * Time.deltaTime;
         }
