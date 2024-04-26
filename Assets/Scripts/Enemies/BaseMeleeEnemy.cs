@@ -1,98 +1,70 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class BaseMeleeEnemy : BaseEnemy
 {
-    [SerializeField] private NavMeshQueryFilter _navMeshfilter;
-    [SerializeField] private float _movementSpeed;
+    [SerializeField] private FollowTargetPattern _followTargetPattern;
+    [SerializeField] private float _attackCooldown;
+    [SerializeField] private LayerMask _attackMask;
+    [SerializeField] private float _damage;
 
-    private NavMeshPath _path;
-    private int _pathIndex = 0;
-    private Vector3 _nextPointToMove = Vector3.zero;
-    private float _prevDistanceToPoint = -1f;
+    [SerializeField] private GameObject TEST_preAttackNotification;
 
-    private float _reCalculatePathTimer = 0;
-
-    public EnemyTarget Target { get; private set; }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        var player = FindObjectOfType<PlayerStats>();
-        Target = new EnemyTarget(player.transform, player);
-    }
+    private float _attackTimer = 0;
 
     protected virtual void Start()
     {
-        _path = new();
-        ReCalculatePath();
+        _attackTimer = _attackCooldown;
+        _followTargetPattern.Initialize(this);
+        _followTargetPattern.StartPattern();
     }
 
-    public bool TrySetTarget(GameObject target)
+    private void PreAttack()
     {
-        if(target.TryGetComponent<IDamageable>(out var damageable))
-        {
-            Target = new EnemyTarget(target.transform, damageable);
-            return true;
-        }
-        return false;
+        _attackTimer = _attackCooldown;
+        StartCoroutine(PreAttackIE());
     }
 
-    public void ReCalculatePath()
+    private IEnumerator PreAttackIE()
     {
-        NavMesh.CalculatePath(transform.position, Target.Transform.position,
-            0b11111111, _path);
+        TEST_preAttackNotification.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        TEST_preAttackNotification.SetActive(false);
+        Attack();
+    }
 
-        if(_path == null || _path.corners.Length == 0)
-        {
-            _pathIndex = -1;
+    private void Attack()
+    {
+        if (IsStuck)
             return;
-        }
 
-        _pathIndex = 0;
-        _nextPointToMove = _path.corners[0];
-    }
-
-    public void GoToNextPoint()
-    {
-        _prevDistanceToPoint = -1;
-        _pathIndex++;
-        if(_pathIndex >= _path.corners.Length)
+        _attackTimer = _attackCooldown;
+        var direction = (Target.Transform.position - transform.position).normalized;
+        var center = transform.position + direction * 3;
+        var size = new Vector3(1.5f, 1f, 1.5f);
+        var colliders = Physics.OverlapBox(center, size, transform.rotation, _attackMask);
+        foreach(var collider in colliders)
         {
-            _pathIndex = -1;
-            return;
+            if(collider.TryGetComponent<IDamageable>(out var damageable))
+            {
+                damageable.Hurt(gameObject, DamageType.QUICK_ATTACK, _damage);
+            }
         }
-
-        _nextPointToMove = _path.corners[_pathIndex];
     }
 
     protected override void Update()
     {
         base.Update();
-
-        if(_reCalculatePathTimer > 0)
+        if(_attackTimer > 0)
         {
-            _reCalculatePathTimer -= Time.deltaTime;
+            _attackTimer -= Time.deltaTime;
         }
         else
         {
-            _reCalculatePathTimer = 1;
-        }
-        
-        if(_pathIndex >= 0)
-        {
-            var direction = _nextPointToMove - transform.position;
-            direction = direction.normalized * _movementSpeed;
-            Controller.Move(direction * Time.deltaTime);
-
-            float dist = Vector3.Distance(transform.position, _nextPointToMove);
-            if(_prevDistanceToPoint < 0 || dist < _prevDistanceToPoint)
+            float dist = Vector3.Distance(transform.position, Target.Transform.position);
+            if (dist < 2.5f)
             {
-                _prevDistanceToPoint = dist;
-            }
-            else
-            {
-                GoToNextPoint();
+                PreAttack();
             }
         }
     }

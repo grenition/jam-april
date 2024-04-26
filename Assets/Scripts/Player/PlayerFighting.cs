@@ -16,10 +16,13 @@ public class PlayerFighting : MonoBehaviour
 
     public const KeyCode QUICK_ATTACK_KEY = KeyCode.Mouse0;
     public const KeyCode SLOW_ATTACK_KEY = KeyCode.Mouse1;
+    public const KeyCode BLOCK_KEY = KeyCode.Q;
 
     private PlayerMovement _movement;
     private Coroutine _attackCor;
     private KeyCode _lastAttackKeyPressed = KeyCode.None;
+
+    public bool IsBlocking { get; private set; }
 
     private void Awake()
     {
@@ -95,6 +98,9 @@ public class PlayerFighting : MonoBehaviour
 
     private void Update()
     {
+        if (_movement.Stats.IsStuck)
+            return;
+
         if(Input.GetKeyDown(QUICK_ATTACK_KEY) && !_movement.OnAnimation)
         {
             QuickAttack();
@@ -117,5 +123,7 @@ public class PlayerFighting : MonoBehaviour
                 }
             }
         }
+
+        IsBlocking = Input.GetKey(BLOCK_KEY) && !_movement.OnAnimation;
     }
 }

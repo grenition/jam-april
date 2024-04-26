@@ -15,6 +15,9 @@ public class DamageIndicatorsPool : MonoBehaviour
     private int _poolIndex = 0;
     private float _damageCountTime = 0;
 
+    private Transform _parent;
+    private Vector3 _offset;
+
     public float TotalDamage { get; private set; }
 
     private void Start()
@@ -25,6 +28,13 @@ public class DamageIndicatorsPool : MonoBehaviour
             pool.gameObject.SetActive(false);
             _pool.Add(pool);
         }
+    }
+
+    public void SetParentAndOffset(Transform parent, Vector3 offset)
+    {
+        _parent = parent;
+        _offset = offset;
+        transform.SetParent(null);
     }
 
     public void SpawnIndicator(float damage, DamageType type)
@@ -81,7 +91,7 @@ public class DamageIndicatorsPool : MonoBehaviour
         var clr = _mainText.color;
         clr.a = 1;
         _mainText.color = clr;
-        _mainText.text = $"-{TotalDamage}";
+        _mainText.text = $"-{Mathf.RoundToInt(TotalDamage)}";
         ColorMainText();
         _damageCountTime = DAMAGE_COUNT_TIME;
 
@@ -111,6 +121,15 @@ public class DamageIndicatorsPool : MonoBehaviour
                 color.a = _damageCountTime / FADE_OUT_TIME;
                 _mainText.color = color;
             }
+            if(_damageCountTime <= 0 && _parent == null && transform.parent == null)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        if(_parent != null)
+        {
+            transform.position = _parent.position + _offset;
         }
     }
 }
