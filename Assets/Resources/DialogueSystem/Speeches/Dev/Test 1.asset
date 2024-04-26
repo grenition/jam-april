@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32de7844057edd4b8bd39ba33f1ac55, type: 3}
+  m_Name: Test 1
+  m_EditorClassIdentifier: 
+  speeches:
+  - startTime: 4
+    speechClip: {fileID: 11400000, guid: e6d5e3fe943d573489b96fc93287b1ef, type: 2}
+  - startTime: 22
+    speechClip: {fileID: 11400000, guid: f555c3373cc74a049820762abc8094a8, type: 2}
