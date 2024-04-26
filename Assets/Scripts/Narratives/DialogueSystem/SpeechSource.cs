@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpeechSource : MonoBehaviour
 {
+    public UnityEvent OnSpeechStart;
+    public UnityEvent OnSpeechEnd;
+
     [SerializeField] private Speech _speech;
     [SerializeField] private bool _playOneTime = true;
 
@@ -29,6 +33,8 @@ public class SpeechSource : MonoBehaviour
         foreach (var speech in _speech.speeches)
             StartCoroutine(PlaySpeechClip(speech));
 
+        StartCoroutine(CallSpeechEnd(_speech.duration));
+
         _isPlayed = true;
     }
     public void Stop()
@@ -40,5 +46,10 @@ public class SpeechSource : MonoBehaviour
         yield return new WaitForSeconds(speechData.startTime);
         _controller?.PlayOneShot(speechData.speechClip.clip);
         _subtitles?.DrawSubtitles(speechData.speechClip.subtitles);
+    }
+    private IEnumerator CallSpeechEnd(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        OnSpeechEnd?.Invoke();
     }
 }

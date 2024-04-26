@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d32de7844057edd4b8bd39ba33f1ac55, type: 3}
-  m_Name: Test 1
+  m_Name: Test 2
   m_EditorClassIdentifier: 
   speeches:
-  - startTime: 4
-    speechClip: {fileID: 11400000, guid: e6d5e3fe943d573489b96fc93287b1ef, type: 2}
-  - startTime: 22
+  - startTime: 0
     speechClip: {fileID: 11400000, guid: f555c3373cc74a049820762abc8094a8, type: 2}
-  duration: 30
+  - startTime: 15
+    speechClip: {fileID: 11400000, guid: e6d5e3fe943d573489b96fc93287b1ef, type: 2}
+  duration: 20

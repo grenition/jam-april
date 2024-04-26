@@ -14,4 +14,5 @@ public class Speech : ScriptableObject
     }
 
     public List<SpeechData> speeches;
+    public float duration;
 }
