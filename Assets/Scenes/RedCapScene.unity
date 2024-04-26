@@ -1218,7 +1218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4911bb071fe142944b322581a5d364ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1449084379}
   _mainMenu: 
+  _redCap: {fileID: 1055526224}
 --- !u!4 &1261285924
 Transform:
   m_ObjectHideFlags: 0
@@ -1244,7 +1246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1417150146}
   m_Layer: 0
-  m_Name: RedCapMotion
+  m_Name: RedCap_Motion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

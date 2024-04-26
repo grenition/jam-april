@@ -5,15 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GameLifetime : MonoBehaviour
 { 
-    public static GameLifetime Instance { get; protected set; }
+    public Player Player => _player;
 
+    [SerializeField] protected Player _player;
     [SerializeField, Scene] private string _mainMenu;
 
     protected virtual void Awake()
     {
-        Instance = this;
+        ServiceLocator.Register<GameLifetime>(this);
     }
-    
+    protected virtual void OnDestroy()
+    {
+        ServiceLocator.Unregister<GameLifetime>();
+    }
+
     public virtual void Play()
     {
 

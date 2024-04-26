@@ -12,6 +12,10 @@ public class RedCapMotionTrigger : PlayerTrigger
         if (_isUsedBefore)
             return;
 
-        _movementSpline.MoveAgent(RedCap.Instance.Agent);
+        var redCapLifetime = ServiceLocator.Get<RedCapLifetime>();
+        if (redCapLifetime == null)
+            return;
+
+        _movementSpline.MoveAgent(redCapLifetime.RedCap.Agent);
     }
 }
