@@ -52,8 +52,8 @@ public class PlayerFighting : MonoBehaviour
 
     private IEnumerator AttackIE(float preTime, float attackTime, float damage, DamageType type)
     {
-        _lastAttackKeyPressed = KeyCode.None;
         yield return new WaitForSeconds(preTime);
+        _lastAttackKeyPressed = KeyCode.None;
         TEST_slashEffect.SetActive(true);
         
         if(_movement.LastFrameInputVector.magnitude > 0)
@@ -77,6 +77,7 @@ public class PlayerFighting : MonoBehaviour
 
         if(_lastAttackKeyPressed != KeyCode.None)
         {
+            _movement.transform.LookAt(_movement.transform.position + _movement.LastFrameInputVector * 10);
             if(_lastAttackKeyPressed == QUICK_ATTACK_KEY)
             {
                 QuickAttack();

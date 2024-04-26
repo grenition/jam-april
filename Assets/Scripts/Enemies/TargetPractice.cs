@@ -5,6 +5,7 @@ using UnityEngine;
 public class TargetPractice : MonoBehaviour, IDamageable
 {
     [SerializeField] private MeshRenderer _mesh;
+    [SerializeField] private DamageIndicatorsPool _damageIndicatorsPool;
 
     private Material _mat;
 
@@ -21,7 +22,7 @@ public class TargetPractice : MonoBehaviour, IDamageable
 
     public void Hurt(GameObject source, DamageType type, float damage)
     {
-        DamageIndicatorsPool.SpawnIndicator(damage, transform.position + Vector3.up, type);
+        _damageIndicatorsPool.SpawnIndicator(damage, type);
         if(_cor != null)
         {
             StopCoroutine(_cor);
