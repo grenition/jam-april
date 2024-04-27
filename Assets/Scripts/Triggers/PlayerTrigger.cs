@@ -5,19 +5,30 @@ using UnityEngine.Events;
 
 public class PlayerTrigger : MonoBehaviour
 {
-    public UnityEvent OnPlayerEnter;
-    public UnityEvent OnPlayerExit;
+    public UnityEvent<Player> OnPlayerEnter;
+    public UnityEvent<Player> OnPlayerExit;
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
+        if (!other.TryGetComponent(out Player player))
             return;
-        OnPlayerEnter?.Invoke();
+        OnPlayerTriggerEnter(player);
+        OnPlayerEnter?.Invoke(player);
     }
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player"))
+        if (!other.TryGetComponent(out Player player))
             return;
-        OnPlayerExit?.Invoke();
+        OnPlayerTriggerExit(player);
+        OnPlayerExit?.Invoke(player);
+    }
+
+    protected virtual void OnPlayerTriggerEnter(Player player)
+    {
+
+    }
+    protected virtual void OnPlayerTriggerExit(Player player)
+    {
+
     }
 }
