@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _subtitleText: {fileID: 7360539704609255290}
   _subtitleGroup: {fileID: 8197995237929518910}
-  _charsPerSecond: 30
+  _charsPerSecond: 18
   _subtitlesLifetime: 10
   _fadeTime: 3
 --- !u!1 &7362253803629858405

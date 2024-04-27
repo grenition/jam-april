@@ -9,6 +9,8 @@ public class SpeechSource : MonoBehaviour
     public UnityEvent OnSpeechStart;
     public UnityEvent OnSpeechEnd;
 
+    public Speech Speech => _speech;
+
     [SerializeField] private Speech _speech;
     [SerializeField] private bool _playOneTime = true;
 
