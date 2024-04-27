@@ -23,7 +23,7 @@ public class DamageIndicator : MonoBehaviour
         gameObject.SetActive(true);
         _text = GetComponent<TMP_Text>();
         _text.color = color;
-        _text.text = damage.ToString();
+        _text.text = Mathf.RoundToInt(damage).ToString();
         if(Random.Range(0, 3) == 0)
         {
             _moveDirection = Vector3.left;

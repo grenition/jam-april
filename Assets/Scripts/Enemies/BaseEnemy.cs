@@ -1,30 +1,48 @@
-using Unity.AI.Navigation;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class BaseEnemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float _maxHealth;
+    [SerializeField] private float _maxHealth, _speed;
     [SerializeField] private float _knockbackResistance;
     [SerializeField] private GravityObject _gravityObject;
     [SerializeField] private DamageIndicatorsPool _damageIndicatorsPool;
+    [SerializeField] private float _hurtStamina, _stuckTime;
 
     public const float KNOCKBACK_SLOWDOWN = 4;
 
     private Vector3 _knockbackDirection = Vector3.zero;
     private float _knockbackStrength = 0;
+    private Coroutine _stuckCor;
 
     public CharacterController Controller { get; private set; }
 
     public float Health { get; protected set; }
 
     public float MaxHealth => _maxHealth;
+    public float Speed => _speed;
     public GravityObject GravityObject => _gravityObject;
+    public EnemyTarget Target { get; private set; }
+    public bool IsStuck { get; private set; }
 
     protected virtual void Awake()
     {
         Health = MaxHealth;
         Controller = GetComponent<CharacterController>();
+        var player = FindObjectOfType<PlayerStats>();
+        Target = new EnemyTarget(player.transform, player);
+        _damageIndicatorsPool.SetParentAndOffset(transform, Vector3.up);
+    }
+
+    public bool TrySetTarget(GameObject target)
+    {
+        if (target.TryGetComponent<IDamageable>(out var damageable))
+        {
+            Target = new EnemyTarget(target.transform, damageable);
+            return true;
+        }
+        return false;
     }
 
     public void Knockback(Vector3 direction)
@@ -47,6 +65,22 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         }
     }
 
+    private void Stuck()
+    {
+        if(_stuckCor != null)
+        {
+            StopCoroutine(_stuckCor);
+        }
+        _stuckCor = StartCoroutine(StuckIE());
+    }
+
+    private IEnumerator StuckIE()
+    {
+        IsStuck = true;
+        yield return new WaitForSeconds(_stuckTime);
+        IsStuck = false;
+    }
+
     public virtual void Hurt(GameObject source, DamageType type, float damage)
     {
         Health -= damage;
@@ -56,9 +90,14 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         Knockback(knockbackDirection);
         
         _damageIndicatorsPool.SpawnIndicator(damage, type);
+
         if(Health <= 0)
         {
             Die();
+        }
+        else if(_damageIndicatorsPool.TotalDamage >= _hurtStamina)
+        {
+            Stuck();
         }
     }
 
