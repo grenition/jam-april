@@ -32,7 +32,8 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         Controller = GetComponent<CharacterController>();
         var player = FindObjectOfType<PlayerStats>();
         Target = new EnemyTarget(player.transform, player);
-        _damageIndicatorsPool.SetParentAndOffset(transform, Vector3.up);
+        _damageIndicatorsPool.SetParentAndOffset(transform, Vector3.up * 1.4f);
+        _damageIndicatorsPool.Initialize(_maxHealth);
     }
 
     public bool TrySetTarget(GameObject target)
@@ -89,7 +90,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         knockbackDirection.y = 0;
         Knockback(knockbackDirection, data.KnockBackStrength);
         
-        _damageIndicatorsPool.SpawnIndicator(data.Damage, data.Type);
+        _damageIndicatorsPool.SpawnIndicator(data.Damage, data.Type, Health);
 
         if(Health <= 0)
         {

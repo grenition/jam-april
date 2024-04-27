@@ -38,7 +38,7 @@ public class PlayerAnimator : MonoBehaviour
         {
             _source.Stop();
             _source.clip = clip;
-            _source.pitch = Random.Range(.8f, 1.2f);
+            _source.pitch = Random.Range(.9f, 1.1f);
             _source.Play();
         }
     }
@@ -71,5 +71,5 @@ public class PlayerAnimator : MonoBehaviour
 
 public enum PlayerAnimatorState
 {
-    Idle, Running, Jump, Attack
+    Idle, Running, Jump, Attack, Blocking, Stunning
 }

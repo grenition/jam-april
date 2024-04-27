@@ -4,6 +4,7 @@ using UnityEngine;
 public class BaseMeleeEnemy : BaseEnemy
 {
     [SerializeField] private FollowTargetPattern _followTargetPattern;
+    [SerializeField] private FindNearestTargetPattern _findNearestPattern;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private LayerMask _attackMask;
     [SerializeField] private float _damage;
@@ -16,7 +17,15 @@ public class BaseMeleeEnemy : BaseEnemy
     {
         _attackTimer = _attackCooldown;
         _followTargetPattern.Initialize(this);
+        _findNearestPattern.Initialize(this);
         _followTargetPattern.StartPattern();
+
+        var redCapLifetimen = ServiceLocator.Get<RedCapLifetime>();
+        if (redCapLifetimen == null)
+            return;
+        _findNearestPattern.PossibleTargets.Add(redCapLifetimen.Player.gameObject);
+        _findNearestPattern.PossibleTargets.Add(redCapLifetimen.RedCap.gameObject);
+        _findNearestPattern.StartPattern();
     }
 
     private void PreAttack()
@@ -48,7 +57,7 @@ public class BaseMeleeEnemy : BaseEnemy
             if(collider.TryGetComponent<IDamageable>(out var damageable))
             {
                 damageable.Hurt(gameObject,
-                    new(10, DamageType.QUICK_ATTACK, 0, AttackColliderType.Slash, 5));
+                    new(_damage, DamageType.QUICK_ATTACK, 0, AttackColliderType.Slash, 5));
             }
         }
     }
