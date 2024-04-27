@@ -13,8 +13,7 @@ public class PlayerFighting : MonoBehaviour
     [SerializeField] private float _mobilityInAttack;
 
     [Header("Sounds")]
-    [SerializeField] private AudioClip _quickAttackClip;
-    [SerializeField] private AudioClip _quickAttack2Clip, _heavyAttackClip;
+    [SerializeField] private AudioClip _quickAttackClip, _quickAttack2Clip, _heavyAttackClip;
 
     public const KeyCode QUICK_ATTACK_KEY = KeyCode.Mouse0;
     public const KeyCode SLOW_ATTACK_KEY = KeyCode.Mouse1;
@@ -137,13 +136,6 @@ public class PlayerFighting : MonoBehaviour
 
     }
 
-    public void Stun()
-    {
-        _isSlashMoving = false;
-        _movement.Animator.SetState(PlayerAnimatorState.Stunning);
-        _movement.OnAnimation = false;
-    }
-
     private void Update()
     {
         if (_movement.Stats.IsStuck || !_movement.GravityObject.OnLand)
@@ -159,36 +151,29 @@ public class PlayerFighting : MonoBehaviour
             _movement.Controller.Move(_slashMoveVector * _slashMoveStrength * Time.deltaTime);
         }
 
-        if (!IsBlocking)
+        if(Input.GetKeyDown(QUICK_ATTACK_KEY) && !_movement.OnAnimation)
         {
-            if (Input.GetKeyDown(QUICK_ATTACK_KEY) && !_movement.OnAnimation)
-            {
-                QuickAttack();
-            }
-            else if (Input.GetKeyDown(SLOW_ATTACK_KEY) && !_movement.OnAnimation)
-            {
-                SlowAttack();
-            }
-            else
-            {
-                var allBufferedKeys = new KeyCode[] { SLOW_ATTACK_KEY, QUICK_ATTACK_KEY,
+            QuickAttack();
+        }
+        else if(Input.GetKeyDown(SLOW_ATTACK_KEY) && !_movement.OnAnimation)
+        {
+            SlowAttack();
+        }
+        else
+        {
+            var allBufferedKeys = new KeyCode[] { SLOW_ATTACK_KEY, QUICK_ATTACK_KEY,
                 PlayerMovement.DASH_KEY };
 
-                foreach (var key in allBufferedKeys)
+            foreach(var key in allBufferedKeys)
+            {
+                if(Input.GetKeyDown(key))
                 {
-                    if (Input.GetKeyDown(key))
-                    {
-                        _lastAttackKeyPressed = key;
-                        break;
-                    }
+                    _lastAttackKeyPressed = key;
+                    break;
                 }
             }
         }
 
         IsBlocking = Input.GetKey(BLOCK_KEY) && !_movement.OnAnimation;
-        if(IsBlocking)
-        {
-            _movement.Animator.SetState(PlayerAnimatorState.Blocking);
-        }
     }
 }

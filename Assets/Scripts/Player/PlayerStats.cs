@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour, IDamageable
 {
@@ -9,8 +8,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
     [SerializeField] private float _hurtStamina, _stuckTime, _stuckImmuneTime;
     [SerializeField] private float _knockbackResistance;
     [SerializeField] private float _shieldStamina, _shieldStaminaSpeed;
-
-    [SerializeField] private Slider _staminaBar, _staminaBar2;
 
     private float _curHealth, _curShieldStamina;
     private Coroutine _stuckCor;
@@ -26,11 +23,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _damageIndicators.SetParentAndOffset(transform, Vector3.up);
         Movement = FindObjectOfType<PlayerMovement>();
         Fighting = FindObjectOfType<PlayerFighting>();
-        _damageIndicators.Initialize(_maxHealth);
-        _staminaBar.maxValue = _shieldStamina;
-        _staminaBar.value = 0;
-        _staminaBar2.maxValue = _shieldStamina;
-        _staminaBar2.value = 0;
     }
 
     public void Stuck()
@@ -39,7 +31,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
         {
             StopCoroutine(_stuckCor);
         }
-        Fighting.Stun();
         _stuckCor = StartCoroutine(StuckIE());
     }
 
@@ -65,17 +56,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
         if(Fighting.IsBlocking && IsLookingForObject(source.transform))
         {
             _curShieldStamina += data.Damage;
-            if (_curShieldStamina > _shieldStamina)
-            {
-                Stuck();
-            }
-            else
-            {
-                data.Damage /= 10;
-            }
+            data.Damage /= 10;
         }
 
-        _damageIndicators.SpawnIndicator(data.Damage, data.Type, _curHealth);
+        _damageIndicators.SpawnIndicator(data.Damage, data.Type);
         _curHealth -= data.Damage;
 
         if(_curHealth <= 0)
@@ -91,6 +75,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
                 data.KnockBackStrength / _knockbackResistance : data.KnockBackStrength,
                 direction);
         }
+        else if(_curShieldStamina > _shieldStamina)
+        {
+            Stuck();
+        }
     }
 
     private void Update()
@@ -99,8 +87,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
         {
             _curShieldStamina = Mathf.Clamp(_curShieldStamina -  _shieldStaminaSpeed * Time.deltaTime,
                 0, _shieldStamina);
-            _staminaBar.value = _curShieldStamina;
-            _staminaBar2.value = _curShieldStamina;
         }
     }
 
