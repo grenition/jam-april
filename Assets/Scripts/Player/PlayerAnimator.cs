@@ -6,14 +6,18 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private PlayerFighting _fighting;
     [SerializeField] private AudioSource _source;
 
-    private void OnEnable()
+    private void Awake()
     {
-        ServiceLocator.Register(this);
+        ServiceLocator.Register<PlayerAnimator>(this);
+    }
+    private void OnDestroy()
+    {
+        ServiceLocator.Unregister<PlayerAnimator>();
     }
 
     public void SetState(PlayerAnimatorState state)
     {
-        _animator.SetInteger("State", (int)state);
+        _animator?.SetInteger("State", (int)state);
     }
 
     public PlayerAnimatorState GetState()
@@ -23,7 +27,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void SetHeavyAttack(bool value)
     {
-        _animator.SetBool("HeavyAttack", value);
+        _animator?.SetBool("HeavyAttack", value);
     }
 
     public void StartBuffer()

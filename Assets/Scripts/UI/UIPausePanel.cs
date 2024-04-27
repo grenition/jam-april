@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class UIPausePanel : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _panel;
@@ -19,6 +20,9 @@ public class UIPausePanel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (_lifetime.Loosed)
+                return;
+
             _isPaused = !_isPaused;
 
             if (!_isPaused)
@@ -56,5 +60,9 @@ public class UIPausePanel : MonoBehaviour
     public void ExitGame()
     {
         _lifetime.ExitApplication();
+    }
+    public void ReloadGame()
+    {
+        _lifetime.ReloadGame();
     }
 }
