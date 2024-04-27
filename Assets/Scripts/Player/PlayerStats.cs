@@ -126,5 +126,17 @@ public class PlayerStats : MonoBehaviour, IDamageable
         StopAllCoroutines();
         Destroy(gameObject);
     }
+
+    public void Heal(float value)
+    {
+        float diff = Mathf.Min(_maxHealth - _curHealth, value);
+        _curHealth = Mathf.Clamp(_curHealth + value, 0, _maxHealth);
+        _damageIndicators.SpawnIndicator(-diff, DamageType.HEAL, _curHealth);
+    }
+
+    public void HealAll()
+    {
+        Heal(10000);
+    }
 }
 
