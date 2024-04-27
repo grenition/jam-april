@@ -24,7 +24,7 @@ public class DamageIndicatorsPool : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             var pool = Instantiate(_indicatorPrefab, transform);
             pool.gameObject.SetActive(false);
@@ -50,11 +50,11 @@ public class DamageIndicatorsPool : MonoBehaviour
 
     public void SpawnIndicator(float damage, DamageType type, float totalHealth)
     {
-        if(type == DamageType.HEAL)
+        if (type == DamageType.HEAL)
         {
             SpawnIndicator(damage, Color.green, totalHealth);
         }
-        else if(type == DamageType.QUICK_ATTACK)
+        else if (type == DamageType.QUICK_ATTACK)
         {
             SpawnIndicator(damage, Color.yellow, totalHealth);
         }
@@ -71,11 +71,11 @@ public class DamageIndicatorsPool : MonoBehaviour
 
     private void ColorMainText()
     {
-        if(TotalDamage > FULL_RED_TEXT_DAMAGE)
+        if (TotalDamage > FULL_RED_TEXT_DAMAGE)
         {
             _mainText.color = Color.red;
         }
-        else if(TotalDamage == 0)
+        else if (TotalDamage == 0)
         {
             _mainText.color = Color.yellow;
         }
@@ -90,7 +90,7 @@ public class DamageIndicatorsPool : MonoBehaviour
 
     public void SpawnIndicator(float damage, Color color, float totalHealth)
     {
-        if(_damageCountTime > 0)
+        if (_damageCountTime > 0)
         {
             TotalDamage += damage;
         }
@@ -124,7 +124,7 @@ public class DamageIndicatorsPool : MonoBehaviour
             _poolIndex = (_poolIndex + 1) % _pool.Count;
         }
 
-        if(totalHealth <= 0)
+        if (totalHealth <= 0)
         {
             _damageCountTime = .1f;
         }
@@ -132,10 +132,10 @@ public class DamageIndicatorsPool : MonoBehaviour
 
     private void Update()
     {
-        if(_damageCountTime > 0)
+        if (_damageCountTime > 0)
         {
             _damageCountTime = Mathf.Clamp(_damageCountTime - Time.deltaTime, 0, DAMAGE_COUNT_TIME);
-            if(_damageCountTime < FADE_OUT_TIME)
+            if (_damageCountTime < FADE_OUT_TIME)
             {
                 var color = _mainText.color;
                 color.a = _damageCountTime / FADE_OUT_TIME;
@@ -143,13 +143,13 @@ public class DamageIndicatorsPool : MonoBehaviour
 
                 _healthBar.transform.localScale = new Vector3(1, _damageCountTime / FADE_OUT_TIME, 1);
             }
-            if(_damageCountTime <= 0 && _parent == null && transform.parent == null)
+            if (_damageCountTime <= 0 && _parent == null && transform.parent == null)
             {
                 Destroy(gameObject);
             }
         }
 
-        if(_parent != null)
+        if (_parent != null)
         {
             transform.position = _parent.position + _offset;
         }

@@ -16,7 +16,7 @@ public class GravityObject : MonoBehaviour
         if (Physics.CheckBox(_floorCollider.position, _floorColliderSize / 2,
             Quaternion.identity, _floorColliderMask))
         {
-            if (VelocityY <= 0)
+            if (VelocityY < 0)
             {
                 VelocityY = 0;
                 OnLand = true;

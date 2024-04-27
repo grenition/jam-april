@@ -34,7 +34,7 @@ public class PlayerAnimator : MonoBehaviour
     public void PlaySlashEffect(int attackIndex)
     {
         var clip = _fighting.AllAttacks[attackIndex].SlashClip;
-        if(clip != null)
+        if (clip != null)
         {
             _source.Stop();
             _source.clip = clip;
@@ -62,7 +62,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void EndAttack()
     {
-        if(GetState() == PlayerAnimatorState.Idle)
+        if (GetState() == PlayerAnimatorState.Idle)
         {
             _fighting.EndAttack();
         }
