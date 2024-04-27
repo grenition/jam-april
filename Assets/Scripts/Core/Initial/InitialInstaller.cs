@@ -7,7 +7,7 @@ public class InitialInstaller
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
-        //setup root components
-        Debug.Log("Initial load");  
+        var rootLifetime = Resources.Load<RootLifetime>("Lifetimes/RootLifetime");
+        ServiceLocator.Register<RootLifetime>(Object.Instantiate(rootLifetime));
     }
 }

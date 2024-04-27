@@ -17,5 +17,7 @@ public class RedCapMotionTrigger : PlayerTrigger
             return;
 
         _movementSpline.MoveAgent(redCapLifetime.RedCap.Agent);
+
+        _isUsedBefore = true;
     }
 }
