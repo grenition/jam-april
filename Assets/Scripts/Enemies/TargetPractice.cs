@@ -13,7 +13,7 @@ public class TargetPractice : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        if (_mesh != null)
+        if(_mesh != null)
         {
             _mat = Instantiate(_mesh.material);
             _mesh.material = _mat;
@@ -23,7 +23,7 @@ public class TargetPractice : MonoBehaviour, IDamageable
     public void Hurt(GameObject source, AttackData data)
     {
         _damageIndicatorsPool.SpawnIndicator(data.Damage, data.Type, 1);
-        if (_cor != null)
+        if(_cor != null)
         {
             StopCoroutine(_cor);
         }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FightTask : Task
 {
-    [SerializeField] private float _delay = 10f;
+    [SerializeField] private bool _redCapGathering = true;
+    [SerializeField] private float _fightTime = 20f;
     public override void StartTask()
     {
         if (IsTaskActive)
@@ -33,7 +34,7 @@ public class FightTask : Task
         if (player == null)
             yield break;
 
-        yield return new WaitForSeconds(_delay);
+        yield return new WaitForSeconds(_fightTime);
 
         CompleteTask();
     }

@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 
@@ -56,7 +55,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         else
         {
             _knockbackDirection = direction.normalized;
-            if (_knockbackResistance > 0)
+            if(_knockbackResistance > 0)
             {
                 _knockbackStrength = knockBackStrength / _knockbackResistance;
             }
@@ -69,7 +68,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 
     private void Stuck()
     {
-        if (_stuckCor != null)
+        if(_stuckCor != null)
         {
             StopCoroutine(_stuckCor);
         }
@@ -90,14 +89,14 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         var knockbackDirection = transform.position - source.transform.position;
         knockbackDirection.y = 0;
         Knockback(knockbackDirection, data.KnockBackStrength);
-
+        
         _damageIndicatorsPool.SpawnIndicator(data.Damage, data.Type, Health);
 
-        if (Health <= 0)
+        if(Health <= 0)
         {
             Die();
         }
-        else if (_damageIndicatorsPool.TotalDamage >= _hurtStamina)
+        else if(_damageIndicatorsPool.TotalDamage >= _hurtStamina)
         {
             Stuck();
         }
@@ -115,10 +114,10 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         {
             Controller.Move(Vector3.up * _gravityObject.VelocityY * Time.deltaTime);
         }
-        if (_knockbackStrength > 0)
+        if(_knockbackStrength > 0)
         {
             Controller.Move(_knockbackDirection * _knockbackStrength * Time.deltaTime);
-            if (_gravityObject.OnLand)
+            if(_gravityObject.OnLand)
                 _knockbackStrength -= KNOCKBACK_SLOWDOWN * Time.deltaTime;
         }
     }

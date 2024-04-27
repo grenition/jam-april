@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent (typeof(PlayerMovement))]
 public class PlayerFighting : MonoBehaviour
 {
     [SerializeField] private Transform _attackCenter;
@@ -78,7 +78,7 @@ public class PlayerFighting : MonoBehaviour
 
     private Collider[] GetColliders(AttackColliderType type)
     {
-        if (type == AttackColliderType.Slash)
+        if(type == AttackColliderType.Slash)
         {
             return Physics.OverlapBox(
             _attackCenter.position, _attackColliderSize / 2,
@@ -149,7 +149,7 @@ public class PlayerFighting : MonoBehaviour
         if (_movement.Stats.IsStuck || !_movement.GravityObject.OnLand)
             return;
 
-        if (_isSlashMoving)
+        if(_isSlashMoving)
         {
             _slashMoveVector = Vector3.Lerp(_slashMoveVector,
                 _movement.LastFrameInputVector.normalized, Time.deltaTime * _mobilityInAttack);
@@ -186,9 +186,10 @@ public class PlayerFighting : MonoBehaviour
         }
 
         IsBlocking = Input.GetKey(BLOCK_KEY) && !_movement.OnAnimation;
-        if (IsBlocking)
+        if(IsBlocking)
         {
             _movement.Animator.SetState(PlayerAnimatorState.Blocking);
         }
     }
 }
+
