@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DamageIndicatorsPool : MonoBehaviour
 {
     [SerializeField] private DamageIndicator _indicatorPrefab;
     [SerializeField] private TMP_Text _mainText;
+    [SerializeField] private Slider _healthBar, _hurtBar;
 
     public const float DAMAGE_COUNT_TIME = 3.5f;
     public const float FADE_OUT_TIME = .5f;
@@ -22,12 +24,21 @@ public class DamageIndicatorsPool : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             var pool = Instantiate(_indicatorPrefab, transform);
             pool.gameObject.SetActive(false);
             _pool.Add(pool);
         }
+    }
+
+    public void Initialize(float health)
+    {
+        _healthBar.maxValue = health;
+        _healthBar.value = health;
+        _hurtBar.maxValue = health;
+        _hurtBar.value = health;
+        _healthBar.transform.localScale = new Vector3(1, 0, 1);
     }
 
     public void SetParentAndOffset(Transform parent, Vector3 offset)
@@ -37,34 +48,34 @@ public class DamageIndicatorsPool : MonoBehaviour
         transform.SetParent(null);
     }
 
-    public void SpawnIndicator(float damage, DamageType type)
+    public void SpawnIndicator(float damage, DamageType type, float totalHealth)
     {
-        if(type == DamageType.HEAL)
+        if (type == DamageType.HEAL)
         {
-            SpawnIndicator(damage, Color.green);
+            SpawnIndicator(damage, Color.green, totalHealth);
         }
-        else if(type == DamageType.QUICK_ATTACK)
+        else if (type == DamageType.QUICK_ATTACK)
         {
-            SpawnIndicator(damage, Color.yellow);
+            SpawnIndicator(damage, Color.yellow, totalHealth);
         }
         else
         {
-            SpawnIndicator(damage, Color.red);
+            SpawnIndicator(damage, Color.red, totalHealth);
         }
     }
 
-    public void SpawnIndicator(float damage)
+    public void SpawnIndicator(float damage, float totalHealth)
     {
-        SpawnIndicator(damage, Color.yellow);
+        SpawnIndicator(damage, Color.yellow, totalHealth);
     }
 
     private void ColorMainText()
     {
-        if(TotalDamage > FULL_RED_TEXT_DAMAGE)
+        if (TotalDamage > FULL_RED_TEXT_DAMAGE)
         {
             _mainText.color = Color.red;
         }
-        else if(TotalDamage == 0)
+        else if (TotalDamage == 0)
         {
             _mainText.color = Color.yellow;
         }
@@ -77,16 +88,20 @@ public class DamageIndicatorsPool : MonoBehaviour
         }
     }
 
-    public void SpawnIndicator(float damage, Color color)
+    public void SpawnIndicator(float damage, Color color, float totalHealth)
     {
-        if(_damageCountTime > 0)
+        if (_damageCountTime > 0)
         {
             TotalDamage += damage;
         }
         else
         {
             TotalDamage = damage;
+            _hurtBar.value = totalHealth + damage;
         }
+
+        _healthBar.transform.localScale = Vector3.one;
+        _healthBar.value = totalHealth;
 
         var clr = _mainText.color;
         clr.a = 1;
@@ -108,26 +123,33 @@ public class DamageIndicatorsPool : MonoBehaviour
             _pool[_poolIndex].Initialize(damage, transform.position, color);
             _poolIndex = (_poolIndex + 1) % _pool.Count;
         }
+
+        if (totalHealth <= 0)
+        {
+            _damageCountTime = .1f;
+        }
     }
 
     private void Update()
     {
-        if(_damageCountTime > 0)
+        if (_damageCountTime > 0)
         {
             _damageCountTime = Mathf.Clamp(_damageCountTime - Time.deltaTime, 0, DAMAGE_COUNT_TIME);
-            if(_damageCountTime < FADE_OUT_TIME)
+            if (_damageCountTime < FADE_OUT_TIME)
             {
                 var color = _mainText.color;
                 color.a = _damageCountTime / FADE_OUT_TIME;
                 _mainText.color = color;
+
+                _healthBar.transform.localScale = new Vector3(1, _damageCountTime / FADE_OUT_TIME, 1);
             }
-            if(_damageCountTime <= 0 && _parent == null && transform.parent == null)
+            if (_damageCountTime <= 0 && _parent == null && transform.parent == null)
             {
                 Destroy(gameObject);
             }
         }
 
-        if(_parent != null)
+        if (_parent != null)
         {
             transform.position = _parent.position + _offset;
         }

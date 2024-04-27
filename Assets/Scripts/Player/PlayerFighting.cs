@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent (typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerFighting : MonoBehaviour
 {
     [SerializeField] private Transform _attackCenter;
@@ -13,7 +13,8 @@ public class PlayerFighting : MonoBehaviour
     [SerializeField] private float _mobilityInAttack;
 
     [Header("Sounds")]
-    [SerializeField] private AudioClip _quickAttackClip, _quickAttack2Clip, _heavyAttackClip;
+    [SerializeField] private AudioClip _quickAttackClip;
+    [SerializeField] private AudioClip _quickAttack2Clip, _heavyAttackClip;
 
     public const KeyCode QUICK_ATTACK_KEY = KeyCode.Mouse0;
     public const KeyCode SLOW_ATTACK_KEY = KeyCode.Mouse1;
@@ -77,7 +78,7 @@ public class PlayerFighting : MonoBehaviour
 
     private Collider[] GetColliders(AttackColliderType type)
     {
-        if(type == AttackColliderType.Slash)
+        if (type == AttackColliderType.Slash)
         {
             return Physics.OverlapBox(
             _attackCenter.position, _attackColliderSize / 2,
@@ -136,12 +137,19 @@ public class PlayerFighting : MonoBehaviour
 
     }
 
+    public void Stun()
+    {
+        _isSlashMoving = false;
+        _movement.Animator.SetState(PlayerAnimatorState.Stunning);
+        _movement.OnAnimation = false;
+    }
+
     private void Update()
     {
         if (_movement.Stats.IsStuck || !_movement.GravityObject.OnLand)
             return;
 
-        if(_isSlashMoving)
+        if (_isSlashMoving)
         {
             _slashMoveVector = Vector3.Lerp(_slashMoveVector,
                 _movement.LastFrameInputVector.normalized, Time.deltaTime * _mobilityInAttack);
@@ -151,29 +159,36 @@ public class PlayerFighting : MonoBehaviour
             _movement.Controller.Move(_slashMoveVector * _slashMoveStrength * Time.deltaTime);
         }
 
-        if(Input.GetKeyDown(QUICK_ATTACK_KEY) && !_movement.OnAnimation)
+        if (!IsBlocking)
         {
-            QuickAttack();
-        }
-        else if(Input.GetKeyDown(SLOW_ATTACK_KEY) && !_movement.OnAnimation)
-        {
-            SlowAttack();
-        }
-        else
-        {
-            var allBufferedKeys = new KeyCode[] { SLOW_ATTACK_KEY, QUICK_ATTACK_KEY,
+            if (Input.GetKeyDown(QUICK_ATTACK_KEY) && !_movement.OnAnimation)
+            {
+                QuickAttack();
+            }
+            else if (Input.GetKeyDown(SLOW_ATTACK_KEY) && !_movement.OnAnimation)
+            {
+                SlowAttack();
+            }
+            else
+            {
+                var allBufferedKeys = new KeyCode[] { SLOW_ATTACK_KEY, QUICK_ATTACK_KEY,
                 PlayerMovement.DASH_KEY };
 
-            foreach(var key in allBufferedKeys)
-            {
-                if(Input.GetKeyDown(key))
+                foreach (var key in allBufferedKeys)
                 {
-                    _lastAttackKeyPressed = key;
-                    break;
+                    if (Input.GetKeyDown(key))
+                    {
+                        _lastAttackKeyPressed = key;
+                        break;
+                    }
                 }
             }
         }
 
         IsBlocking = Input.GetKey(BLOCK_KEY) && !_movement.OnAnimation;
+        if (IsBlocking)
+        {
+            _movement.Animator.SetState(PlayerAnimatorState.Blocking);
+        }
     }
 }
