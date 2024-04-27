@@ -7,7 +7,9 @@ public class FightTask : Task
     [SerializeField] private RedCapAnimationState _redCapState = RedCapAnimationState.none;
     [SerializeField] private float _animationDelay = 2f;
     [SerializeField] private float _fightTime = 20f;
+    [SerializeField] private float _healDelayAfterTask = 10f;
     [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private AudioClip _fightMusic;
     public override void StartTask()
     {
         if (IsTaskActive)
@@ -32,8 +34,11 @@ public class FightTask : Task
 
         var redCaplLfetime = ServiceLocator.Get<RedCapLifetime>();
         var redCapAnim = redCaplLfetime.RedCap.GetComponent<RedCapAnimations>();
+        var audioController = ServiceLocator.Get<AudioController>();
 
         _enemySpawner.StartSpawner();
+
+        audioController?.PlayMusic(_fightMusic);
 
         yield return new WaitForSeconds(_animationDelay);
 
@@ -46,6 +51,12 @@ public class FightTask : Task
 
         redCapAnim?.SetAnimState(RedCapAnimationState.none);
 
+        audioController?.StopMusic();
+
         CompleteTask();
+
+        yield return new WaitForSeconds(_healDelayAfterTask);
+
+        redCaplLfetime.Player.GetComponent<PlayerStats>().HealAll();
     }
 }

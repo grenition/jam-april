@@ -19,13 +19,17 @@ public class GameLifetime : MonoBehaviour
         ServiceLocator.Unregister<GameLifetime>();
     }
 
-    public virtual void Play()
+    public virtual void Pause()
     {
-
+        Time.timeScale = 0.0f;
     }
-    public virtual void Stop()
+    public virtual void Unpause()
     {
-
+        Time.timeScale = 1.0f;
+    }
+    public virtual void ExitApplication()
+    {
+        Application.Quit();
     }
     public virtual void ExitMenu()
     {

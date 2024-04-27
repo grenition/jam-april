@@ -18,13 +18,4 @@ public class RedCapLifetime : GameLifetime
         base.OnDestroy();
         ServiceLocator.Unregister<RedCapLifetime>();
     }
-
-    public override void Play()
-    {
-        base.Play();
-    }   
-    public override void Stop()
-    {
-        base.Stop();
-    }
 }

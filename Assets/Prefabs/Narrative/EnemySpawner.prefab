@@ -600,8 +600,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 8887040268109769802, guid: a9e78a651a76f2344ba673b9f3bcf670,
     type: 3}
-  _spawnCooldown: 2
+  _spawnCooldown: 5
   _maxEnemiesCount: 6
+  _enemiesHealth: 50
   _spawnPoints:
   - {fileID: 8563029675953246046}
   - {fileID: 2576002794273202034}
