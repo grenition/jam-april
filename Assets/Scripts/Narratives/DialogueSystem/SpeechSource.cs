@@ -46,7 +46,7 @@ public class SpeechSource : MonoBehaviour
     private IEnumerator PlaySpeechClip(Speech.SpeechData speechData)
     {
         yield return new WaitForSeconds(speechData.startTime);
-        _controller?.PlayOneShot(speechData.speechClip.clip);
+        _controller?.PlayOneShot(speechData.speechClip.clip, AudioSourceChannel.voices);
         _subtitles?.DrawSubtitles(speechData.speechClip.subtitles);
     }
     private IEnumerator CallSpeechEnd(float delay)
