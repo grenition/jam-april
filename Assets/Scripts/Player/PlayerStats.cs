@@ -28,9 +28,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
         Fighting = FindObjectOfType<PlayerFighting>();
         _damageIndicators.Initialize(_maxHealth);
         _staminaBar.maxValue = _shieldStamina;
-        _staminaBar.value = 0;
+        _staminaBar.value = 0f;
         _staminaBar2.maxValue = _shieldStamina;
-        _staminaBar2.value = 0;
+        _staminaBar2.value = 0f;
     }
 
     public void Stuck()
