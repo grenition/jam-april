@@ -36,6 +36,8 @@ public class SpeechSource : MonoBehaviour
         StartCoroutine(CallSpeechEnd(_speech.duration));
 
         _isPlayed = true;
+
+        OnSpeechStart?.Invoke();
     }
     public void Stop()
     {
