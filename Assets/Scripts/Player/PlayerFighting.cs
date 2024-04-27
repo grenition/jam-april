@@ -39,7 +39,7 @@ public class PlayerFighting : MonoBehaviour
         #region AttacksData
         AllAttacks.Add(new(7, DamageType.QUICK_ATTACK, 4f, AttackColliderType.Slash, 5,
             _quickAttackClip));
-        AllAttacks.Add(new(12, DamageType.HEAVY_ATTACK, 5f, AttackColliderType.Circle, 8,
+        AllAttacks.Add(new(20, DamageType.HEAVY_ATTACK, 5f, AttackColliderType.Circle, 8,
             _heavyAttackClip));
         AllAttacks.Add(new(7, DamageType.QUICK_ATTACK, 4f, AttackColliderType.Circle, 7,
             _quickAttack2Clip));
