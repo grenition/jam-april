@@ -35,6 +35,7 @@ public class AudioController : MonoBehaviour
         switch (sourceType)
         {
             case AudioSourceChannel.voices:
+                _voiceSource.Stop();
                 _voiceSource.PlayOneShot(clip);
                 break;
             case AudioSourceChannel.music:

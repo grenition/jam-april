@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 [RequireComponent(typeof(UIShowHideFade))]
 public class UITaskTab : MonoBehaviour
@@ -15,9 +16,9 @@ public class UITaskTab : MonoBehaviour
     {
         _fade = GetComponent<UIShowHideFade>();
     }
-    public void HideAndDestroy()
+    public void HideAndDestroy(Action onComplete = default)
     {
-        _fade.Hide(true);
+        _fade.Hide(true, onComplete);
     }
     public void SetupTab(string label, string description)
     {

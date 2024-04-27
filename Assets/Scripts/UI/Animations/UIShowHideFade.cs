@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using DG.Tweening;
 
 public class UIShowHideFade : MonoBehaviour
@@ -22,7 +23,7 @@ public class UIShowHideFade : MonoBehaviour
         _canvasGroup.DOKill();
         _canvasGroup.DOFade(1f, _fadeTime);
     }
-    public void Hide(bool destroyAfteerFade = false)
+    public void Hide(bool destroyAfteerFade = false, Action onComplete = default)
     {
         _canvasGroup.DOKill();
         _canvasGroup.DOFade(0f, _fadeTime)
@@ -32,6 +33,7 @@ public class UIShowHideFade : MonoBehaviour
                     gameObject.SetActive(false);
                 if(destroyAfteerFade)
                     Destroy(gameObject);
+                onComplete?.Invoke();
             });
     }
 }

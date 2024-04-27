@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedCapAccompanimentTask : Task
+public class GoToPlayerTask : Task
 {
     [SerializeField] private Transform _endPoint;
     [SerializeField] private float _threshholdDistance = 5f;
@@ -28,13 +28,13 @@ public class RedCapAccompanimentTask : Task
         if (IsTaskActive)
             yield break;
 
-        var redCapLifetime = ServiceLocator.Get<RedCapLifetime>();
-        var redCap = redCapLifetime != null ? redCapLifetime.RedCap : null;
-        
-        if(redCap == null)
+        var lifetime = ServiceLocator.Get<GameLifetime>();
+        var player = lifetime != null ? lifetime.Player : null;
+
+        if (player == null)
             yield break;
 
-        yield return new WaitUntil(() => Vector3.Distance(redCap.transform.position, _endPoint.position) < _threshholdDistance);
+        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, _endPoint.position) < _threshholdDistance);
 
         CompleteTask();
     }
