@@ -22,7 +22,7 @@ public class TargetPractice : MonoBehaviour, IDamageable
 
     public void Hurt(GameObject source, AttackData data)
     {
-        _damageIndicatorsPool.SpawnIndicator(data.Damage, data.Type);
+        _damageIndicatorsPool.SpawnIndicator(data.Damage, data.Type, 1);
         if(_cor != null)
         {
             StopCoroutine(_cor);

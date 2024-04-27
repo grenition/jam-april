@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveVec = inputVec * _initSpeed;
         LastFrameInputVector = inputVec;
 
-        if(!CanMove || OnAnimation || Stats.IsStuck)
+        if(!CanMove || OnAnimation || Stats.IsStuck || Stats.Fighting.IsBlocking)
         {
             moveVec = Vector3.zero;
         }
@@ -83,7 +83,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Animator.SetState(PlayerAnimatorState.Idle);
+            Animator.SetState(Stats.Fighting.IsBlocking ?
+                PlayerAnimatorState.Blocking :
+                PlayerAnimatorState.Idle);
         }
 
         //Jumping
