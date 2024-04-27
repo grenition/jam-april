@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class FightTask : Task
 {
-    [SerializeField] private bool _redCapGathering = true;
+    [SerializeField] private RedCapAnimationState _redCapState = RedCapAnimationState.none;
+    [SerializeField] private float _animationDelay = 2f;
     [SerializeField] private float _fightTime = 20f;
+    [SerializeField] private EnemySpawner _enemySpawner;
     public override void StartTask()
     {
         if (IsTaskActive)
@@ -17,7 +19,7 @@ public class FightTask : Task
     public override void ForceStopTask()
     {
         StopAllCoroutines();
-        base.ForceStopTask();
+        base.ForceStopTask();   
     }
     public override void CompleteTask()
     {
@@ -28,13 +30,21 @@ public class FightTask : Task
         if (IsTaskActive)
             yield break;
 
-        var lifetime = ServiceLocator.Get<GameLifetime>();
-        var player = lifetime != null ? lifetime.Player : null;
+        var redCaplLfetime = ServiceLocator.Get<RedCapLifetime>();
+        var redCapAnim = redCaplLfetime.RedCap.GetComponent<RedCapAnimations>();
 
-        if (player == null)
-            yield break;
+        _enemySpawner.StartSpawner();
 
-        yield return new WaitForSeconds(_fightTime);
+        yield return new WaitForSeconds(_animationDelay);
+
+        redCapAnim?.SetAnimState(_redCapState);
+
+        yield return new WaitForSeconds(_fightTime - _animationDelay);
+
+        _enemySpawner?.StopSpawner();
+        yield return new WaitUntil(() => _enemySpawner.Enemies.Count == 0);
+
+        redCapAnim?.SetAnimState(RedCapAnimationState.none);
 
         CompleteTask();
     }

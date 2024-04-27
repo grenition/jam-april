@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RedCapAnimtionState
+public enum RedCapAnimationState
 {
     none,
     gathering,
-    talking
+    talking,
+    terrified
 }
 
 [RequireComponent(typeof(RedCap))]
@@ -17,7 +18,7 @@ public class RedCapAnimations : MonoBehaviour
 
     private RedCap _redCap;
     private float _curMovement;
-    private RedCapAnimtionState _animState;
+    private RedCapAnimationState _animState;
 
     private void Awake()
     {
@@ -33,30 +34,33 @@ public class RedCapAnimations : MonoBehaviour
 
         _animator.SetFloat("Movement", _curMovement * 0.5f);
 
-        if(movement > 0.5f)
-        {
-            _animator.SetBool("Gathering", false);
-            _animator.SetBool("Talking", false);
-            _animState = RedCapAnimtionState.none;
-        }
+        //if(movement > 0.5f)
+        //{
+        //    _animator.SetBool("Gathering", false);
+        //    _animator.SetBool("Talking", false);
+        //    _animator.SetBool("Terrified", false);
+        //    _animState = RedCapAnimationState.none;
+        //}
     }
 
-    public void SetAnimState(RedCapAnimtionState animState)
+    public void SetAnimState(RedCapAnimationState animState)
     {
+        _animator.SetBool("Gathering", false);
+        _animator.SetBool("Talking", false);
+        _animator.SetBool("Terrified", false);
         _animState = animState;
         switch (_animState)
         {
-            case RedCapAnimtionState.none:
-                _animator.SetBool("Gathering", false);
-                _animator.SetBool("Talking", false);
+            case RedCapAnimationState.none:
                 break;
-            case RedCapAnimtionState.gathering:
+            case RedCapAnimationState.gathering:
                 _animator.SetBool("Gathering", true);
-                _animator.SetBool("Talking", false);
                 break;
-            case RedCapAnimtionState.talking:
-                _animator.SetBool("Gathering", false);
+            case RedCapAnimationState.talking:
                 _animator.SetBool("Talking", true);
+                break;
+            case RedCapAnimationState.terrified:
+                _animator.SetBool("Terrified", true);
                 break;
         }
     }
