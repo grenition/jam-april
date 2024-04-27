@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
     [SerializeField] private float _shieldStamina, _shieldStaminaSpeed;
 
     [SerializeField] private Slider _staminaBar, _staminaBar2;
+
+    public event Action Died, Hurted;
 
     private float _curHealth, _curShieldStamina;
     private Coroutine _stuckCor;
@@ -62,6 +65,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Hurt(GameObject source, AttackData data)
     {
+        Hurted?.Invoke();
         if (Fighting.IsBlocking && IsLookingForObject(source.transform))
         {
             _curShieldStamina += data.Damage;
@@ -106,6 +110,20 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        Movement.Animator.SetState(PlayerAnimatorState.Die);
+        Died?.Invoke();
+        StartCoroutine(DieIE());
+    }
+
+    private IEnumerator DieIE()
+    {
+        yield return new WaitForSeconds(2);
+        AlmostDie();
+    }
+
+    private void AlmostDie()
+    {
+        StopAllCoroutines();
         Destroy(gameObject);
     }
 }

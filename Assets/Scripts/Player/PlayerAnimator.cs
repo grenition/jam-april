@@ -71,5 +71,5 @@ public class PlayerAnimator : MonoBehaviour
 
 public enum PlayerAnimatorState
 {
-    Idle, Running, Jump, Attack, Blocking, Stunning
+    Idle, Running, Jump, Attack, Blocking, Stunning, Die
 }
