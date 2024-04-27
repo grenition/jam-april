@@ -100,15 +100,28 @@ public class DamageIndicatorsPool : MonoBehaviour
             _hurtBar.value = totalHealth + damage;
         }
 
+        if(damage < 0)
+        {
+            TotalDamage = 0;
+            _hurtBar.value = totalHealth;
+        }
+
         _healthBar.transform.localScale = Vector3.one;
         _healthBar.value = totalHealth;
 
-        var clr = _mainText.color;
-        clr.a = 1;
-        _mainText.color = clr;
-        _mainText.text = $"-{Mathf.RoundToInt(TotalDamage)}";
-        ColorMainText();
-        _damageCountTime = DAMAGE_COUNT_TIME;
+        if(damage > 0)
+        {
+            var clr = _mainText.color;
+            clr.a = 1;
+            _mainText.color = clr;
+            _mainText.text = $"-{Mathf.RoundToInt(TotalDamage)}";
+            ColorMainText();
+            _damageCountTime = DAMAGE_COUNT_TIME;
+        }
+        else
+        {
+            damage *= -1;
+        }
 
         if (_pool[_poolIndex].gameObject.activeSelf)
         {

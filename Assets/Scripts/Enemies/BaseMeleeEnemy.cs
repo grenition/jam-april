@@ -9,8 +9,6 @@ public class BaseMeleeEnemy : BaseEnemy
     [SerializeField] private LayerMask _attackMask;
     [SerializeField] private float _damage;
 
-    [SerializeField] private GameObject TEST_preAttackNotification;
-
     private float _attackTimer = 0;
 
     protected virtual void Start()
@@ -36,9 +34,7 @@ public class BaseMeleeEnemy : BaseEnemy
 
     private IEnumerator PreAttackIE()
     {
-        TEST_preAttackNotification.SetActive(true);
         yield return new WaitForSeconds(.5f);
-        TEST_preAttackNotification.SetActive(false);
         Attack();
     }
 

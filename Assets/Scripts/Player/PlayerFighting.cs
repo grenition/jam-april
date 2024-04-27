@@ -11,6 +11,7 @@ public class PlayerFighting : MonoBehaviour
     [SerializeField] private float _attackSphereRadius;
     [SerializeField] private LayerMask _weaponColliderMask;
     [SerializeField] private float _mobilityInAttack;
+    [SerializeField] private ClearBlockUser _clearBlockUser;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip _quickAttackClip;
@@ -189,6 +190,11 @@ public class PlayerFighting : MonoBehaviour
         if(IsBlocking)
         {
             _movement.Animator.SetState(PlayerAnimatorState.Blocking);
+            _clearBlockUser.Block();
+        }
+        else
+        {
+            _clearBlockUser.UnBlock();
         }
     }
 }
