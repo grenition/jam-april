@@ -38,7 +38,11 @@ public class UITaskPanel : MonoBehaviour
                 _canvasGroup.DOKill();
                 _canvasGroup.DOFade(0f, _fadeTime);
             }
-            taskTab.HideAndDestroy();
+            taskTab.HideAndDestroy(async () =>
+            {
+                await UniTask.NextFrame();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
+            });
         }
 
         task.OnTaskCompleted.Bind(() => DestroyTab()).AddTo(this);
