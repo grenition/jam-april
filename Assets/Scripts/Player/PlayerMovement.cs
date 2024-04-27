@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _initSpeed;
     [SerializeField] private float _jumpHeight, _dashCooldown, _dashLength;
     [SerializeField] private GravityObject _gravityObject;
+    [SerializeField] private float _worldAxisAngle;
 
     private float _dashTimer = 0;
     private Vector3 _knockbackDirection = Vector3.zero;
@@ -53,10 +54,21 @@ public class PlayerMovement : MonoBehaviour
         _knockbackStrength = strength;
     }
 
+    private Vector3 RotateByY(Vector3 vector, float angle)
+    {
+        angle *= Mathf.Deg2Rad;
+        return new Vector3(
+            vector.x * Mathf.Cos(angle) - vector.z * Mathf.Sin(angle),
+            0,
+            vector.x * Mathf.Sin(angle) + vector.z * Mathf.Cos(angle)
+        );
+    }
+
     private void Update()
     {
         //WASD Movement
         Vector3 inputVec = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        inputVec = RotateByY(inputVec, _worldAxisAngle);
         Vector3 moveVec = inputVec * _initSpeed;
         LastFrameInputVector = inputVec;
 

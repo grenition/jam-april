@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent (typeof(PlayerMovement))]
@@ -10,6 +11,9 @@ public class PlayerFighting : MonoBehaviour
     [SerializeField] private float _attackSphereRadius;
     [SerializeField] private LayerMask _weaponColliderMask;
     [SerializeField] private float _mobilityInAttack;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip _quickAttackClip, _quickAttack2Clip, _heavyAttackClip;
 
     public const KeyCode QUICK_ATTACK_KEY = KeyCode.Mouse0;
     public const KeyCode SLOW_ATTACK_KEY = KeyCode.Mouse1;
@@ -31,9 +35,12 @@ public class PlayerFighting : MonoBehaviour
         _movement = GetComponent<PlayerMovement>();
 
         #region AttacksData
-        AllAttacks.Add(new(7, DamageType.QUICK_ATTACK, 4f, AttackColliderType.Slash, 5));
-        AllAttacks.Add(new(12, DamageType.HEAVY_ATTACK, 5f, AttackColliderType.Circle, 8));
-        AllAttacks.Add(new(7, DamageType.QUICK_ATTACK, 4f, AttackColliderType.Circle, 7));
+        AllAttacks.Add(new(7, DamageType.QUICK_ATTACK, 4f, AttackColliderType.Slash, 5,
+            _quickAttackClip));
+        AllAttacks.Add(new(12, DamageType.HEAVY_ATTACK, 5f, AttackColliderType.Circle, 8,
+            _heavyAttackClip));
+        AllAttacks.Add(new(7, DamageType.QUICK_ATTACK, 4f, AttackColliderType.Circle, 7,
+            _quickAttack2Clip));
         #endregion
     }
 
