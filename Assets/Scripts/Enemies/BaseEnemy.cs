@@ -45,7 +45,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         return false;
     }
 
-    public void Knockback(Vector3 direction)
+    public void Knockback(Vector3 direction, float knockBackStrength)
     {
         if (_knockbackResistance >= 100)
         {
@@ -56,11 +56,11 @@ public class BaseEnemy : MonoBehaviour, IDamageable
             _knockbackDirection = direction.normalized;
             if(_knockbackResistance > 0)
             {
-                _knockbackStrength = 5 / _knockbackResistance;
+                _knockbackStrength = knockBackStrength / _knockbackResistance;
             }
             else
             {
-                _knockbackStrength = 5;
+                _knockbackStrength = knockBackStrength;
             }
         }
     }
@@ -81,15 +81,15 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         IsStuck = false;
     }
 
-    public virtual void Hurt(GameObject source, DamageType type, float damage)
+    public virtual void Hurt(GameObject source, AttackData data)
     {
-        Health -= damage;
+        Health -= data.Damage;
 
         var knockbackDirection = transform.position - source.transform.position;
         knockbackDirection.y = 0;
-        Knockback(knockbackDirection);
+        Knockback(knockbackDirection, data.KnockBackStrength);
         
-        _damageIndicatorsPool.SpawnIndicator(damage, type);
+        _damageIndicatorsPool.SpawnIndicator(data.Damage, data.Type);
 
         if(Health <= 0)
         {

@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _initSpeed;
-    [SerializeField] private float _gravity;
     [SerializeField] private float _jumpHeight, _dashCooldown, _dashLength;
     [SerializeField] private GravityObject _gravityObject;
 
@@ -21,16 +20,21 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanMove { get; set; } = true;
     public bool CanJump { get; set; } = true;
-    public float Gravity { get { return _gravity; } set { _gravity = value; } }
     public bool OnAnimation { get; set; }
     public Vector3 LastFrameInputVector { get; private set; }
     public GravityObject GravityObject => _gravityObject;
     public PlayerStats Stats { get; private set; }
+    public PlayerAnimator Animator { get; private set; }
 
     private void Awake()
     {
         Stats = GetComponent<PlayerStats>();
         Controller = GetComponent<CharacterController>();
+    }
+
+    private void Start()
+    {
+        Animator = ServiceLocator.Get<PlayerAnimator>();
     }
 
     public void Dash(Vector3 moveVec)
@@ -63,12 +67,18 @@ public class PlayerMovement : MonoBehaviour
         else if(inputVec.magnitude > 0)
         {
             transform.LookAt(transform.position + inputVec * 10);
+            Animator.SetState(PlayerAnimatorState.Running);
+        }
+        else
+        {
+            Animator.SetState(PlayerAnimatorState.Idle);
         }
 
         //Jumping
         if(CanJump && Input.GetKeyDown(JUMP_KEY) && _gravityObject.OnLand && !OnAnimation && !Stats.IsStuck)
         {
-            _gravityObject.VelocityY = Mathf.Sqrt(2 * Gravity * _jumpHeight);
+            _gravityObject.VelocityY = Mathf.Sqrt(2 * GravityObject.GRAVITY * _jumpHeight);
+            Animator.SetState(PlayerAnimatorState.Jump);
         }
 
         moveVec += Vector3.up * _gravityObject.VelocityY;

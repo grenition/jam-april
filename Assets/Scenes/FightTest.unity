@@ -847,13 +847,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345642479}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.31261218, w: 0.9498809}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.84125, y: -0.11, z: 1.3359896}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 36.433}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1534609975
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.23333333
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 9b9815d9f62e7af40bf6f4fc166eb002, type: 2}
   m_BuildHeightMesh: 0
@@ -1382,7 +1382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 200
   _speed: 3
-  _knockbackResistance: 1.4
+  _knockbackResistance: 1.1
   _gravityObject: {fileID: 2024110090}
   _damageIndicatorsPool: {fileID: 335560171}
   _hurtStamina: 10

@@ -47,7 +47,8 @@ public class BaseMeleeEnemy : BaseEnemy
         {
             if(collider.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.Hurt(gameObject, DamageType.QUICK_ATTACK, _damage);
+                damageable.Hurt(gameObject,
+                    new(10, DamageType.QUICK_ATTACK, 0, AttackColliderType.Slash, 5));
             }
         }
     }

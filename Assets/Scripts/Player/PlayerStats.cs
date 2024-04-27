@@ -51,16 +51,16 @@ public class PlayerStats : MonoBehaviour, IDamageable
         return angle < 70;
     }
 
-    public void Hurt(GameObject source, DamageType type, float damage)
+    public void Hurt(GameObject source, AttackData data)
     {
         if(Fighting.IsBlocking && IsLookingForObject(source.transform))
         {
-            _curShieldStamina += damage;
-            damage /= 10;
+            _curShieldStamina += data.Damage;
+            data.Damage /= 10;
         }
 
-        _damageIndicators.SpawnIndicator(damage, type);
-        _curHealth -= damage;
+        _damageIndicators.SpawnIndicator(data.Damage, data.Type);
+        _curHealth -= data.Damage;
 
         if(_curHealth <= 0)
         {
@@ -71,7 +71,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
             Stuck();
             var direction = transform.position - source.transform.position;
             direction.y = 0;
-            Movement.Knockback(_knockbackResistance > 0 ? 5 / _knockbackResistance : 5, direction);
+            Movement.Knockback(_knockbackResistance > 0 ?
+                data.KnockBackStrength / _knockbackResistance : data.KnockBackStrength,
+                direction);
         }
         else if(_curShieldStamina > _shieldStamina)
         {
