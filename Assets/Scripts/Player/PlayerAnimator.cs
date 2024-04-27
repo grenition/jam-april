@@ -4,6 +4,7 @@ public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private PlayerFighting _fighting;
+    [SerializeField] private AudioSource _source;
 
     private void OnEnable()
     {
@@ -28,6 +29,18 @@ public class PlayerAnimator : MonoBehaviour
     public void StartBuffer()
     {
         _fighting.StartBuffer();
+    }
+
+    public void PlaySlashEffect(int attackIndex)
+    {
+        var clip = _fighting.AllAttacks[attackIndex].SlashClip;
+        if(clip != null)
+        {
+            _source.Stop();
+            _source.clip = clip;
+            _source.pitch = Random.Range(.8f, 1.2f);
+            _source.Play();
+        }
     }
 
     public void MoveBeforeAttack(int attackIndex)
