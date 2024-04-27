@@ -35,7 +35,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Stuck()
     {
-        if(_stuckCor != null)
+        if (_stuckCor != null)
         {
             StopCoroutine(_stuckCor);
         }
@@ -62,7 +62,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Hurt(GameObject source, AttackData data)
     {
-        if(Fighting.IsBlocking && IsLookingForObject(source.transform))
+        if (Fighting.IsBlocking && IsLookingForObject(source.transform))
         {
             _curShieldStamina += data.Damage;
             if (_curShieldStamina > _shieldStamina)
@@ -78,7 +78,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _damageIndicators.SpawnIndicator(data.Damage, data.Type, _curHealth);
         _curHealth -= data.Damage;
 
-        if(_curHealth <= 0)
+        if (_curHealth <= 0)
         {
             Die();
         }
@@ -95,9 +95,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if(_curShieldStamina > 0)
+        if (_curShieldStamina > 0)
         {
-            _curShieldStamina = Mathf.Clamp(_curShieldStamina -  _shieldStaminaSpeed * Time.deltaTime,
+            _curShieldStamina = Mathf.Clamp(_curShieldStamina - _shieldStaminaSpeed * Time.deltaTime,
                 0, _shieldStamina);
             _staminaBar.value = _curShieldStamina;
             _staminaBar2.value = _curShieldStamina;
