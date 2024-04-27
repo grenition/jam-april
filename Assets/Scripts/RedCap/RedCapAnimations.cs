@@ -23,6 +23,6 @@ public class RedCapAnimations : MonoBehaviour
 
         _curMovement = Mathf.Lerp(_curMovement, movement, _interpolationFactor * Time.deltaTime);
 
-        _animator.SetFloat("Movement", _curMovement);
+        _animator.SetFloat("Movement", _curMovement * 0.5f);
     }
 }
