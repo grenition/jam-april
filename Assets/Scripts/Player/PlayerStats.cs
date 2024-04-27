@@ -65,7 +65,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         if (Fighting.IsBlocking && IsLookingForObject(source.transform))
         {
             _curShieldStamina += data.Damage;
-            if (_curShieldStamina > _shieldStamina)
+            if (_curShieldStamina > _shieldStamina || data.Type == DamageType.HEAVY_ATTACK)
             {
                 Stuck();
             }
