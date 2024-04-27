@@ -16,7 +16,7 @@ public class TopDownFollower : MonoBehaviour
     {
         _position = transform.position;
         _rotation = transform.rotation;
-        _startPosition = transform.position;
+        _startPosition = _target.position;
     }
 
     private void LateUpdate()

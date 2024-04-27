@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
+public enum AudioSourceChannel
+{
+    voices,
+    music
+}
+
 public class AudioController : MonoBehaviour
 {
-    public AudioSource Source => _source;
+    public AudioSource Source => _voiceSource;
 
-    [SerializeField] private AudioSource _source;
-
+    [SerializeField] private AudioSource _voiceSource;
+    [SerializeField] private AudioSource _musicSorce;
 
     private void Awake()
     {
@@ -19,13 +24,22 @@ public class AudioController : MonoBehaviour
         ServiceLocator.Unregister<AudioController>();
     }
 
-    public void PlayOneShot(AudioClip clip)
+    public void PlayOneShot(AudioClip clip, AudioSourceChannel sourceType)
     {
         if(clip == null)
         {
             Debug.LogError("Clip is null");
             return;
         }
-        _source.PlayOneShot(clip);
+
+        switch (sourceType)
+        {
+            case AudioSourceChannel.voices:
+                _voiceSource.PlayOneShot(clip);
+                break;
+            case AudioSourceChannel.music:
+                _voiceSource.PlayOneShot(clip);
+                break;
+        }
     }
 }
