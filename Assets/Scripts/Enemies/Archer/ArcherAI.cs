@@ -16,6 +16,7 @@ public class ArcherAI : BaseEnemy
 
     private float _attackTimer = 0, _checkPlayerDistTimer = 0;
     private bool _isTargeting = false, _isPreFire = false, _onAnimation = false;
+    private bool _isDie = false;
     private Vector3 _preFireDirection = Vector3.zero;
     private Vector3 _lastBadPose = Vector3.zero;
     private Vector3 _prevPos = Vector3.zero;
@@ -91,8 +92,27 @@ public class ArcherAI : BaseEnemy
         }
     }
 
+    public override void Die()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DieIE());
+    }
+
+    private IEnumerator DieIE()
+    {
+        _isDie = true;
+        _animator.SetInteger(STATE, (int)ArcherAnimatorStates.Die);
+        yield return null;
+        _animator.SetInteger(STATE, (int)ArcherAnimatorStates.Die);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
+    }
+
     public override void Hurt(GameObject source, AttackData data)
     {
+        if (_isDie)
+            return;
+
         base.Hurt(source, data);
         _animator.SetInteger(STATE, (int)ArcherAnimatorStates.Hurt);
         StopTargeting();
@@ -184,6 +204,9 @@ public class ArcherAI : BaseEnemy
 
     protected override void Update()
     {
+        if (_isDie)
+            return;
+
         base.Update();
         
         if(_checkPlayerDistTimer > 0)
