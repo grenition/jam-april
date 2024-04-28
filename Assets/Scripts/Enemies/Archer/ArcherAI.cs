@@ -105,6 +105,7 @@ public class ArcherAI : BaseEnemy
         yield return null;
         _animator.SetInteger(STATE, (int)ArcherAnimatorStates.Die);
         yield return new WaitForSeconds(1.5f);
+        OnDestroyEvent?.Invoke();
         Destroy(gameObject);
     }
 

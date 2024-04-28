@@ -12,6 +12,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
     [SerializeField] private GravityObject _gravityObject;
     [SerializeField] private DamageIndicatorsPool _damageIndicatorsPool;
     [SerializeField] private float _hurtStamina, _stuckTime;
+    [SerializeField] private AudioSource _hurtSource;
 
     public const float KNOCKBACK_SLOWDOWN = 4;
 
@@ -87,6 +88,8 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 
     public virtual void Hurt(GameObject source, AttackData data)
     {
+        _hurtSource.Play();
+
         Health -= data.Damage;
 
         var knockbackDirection = transform.position - source.transform.position;
