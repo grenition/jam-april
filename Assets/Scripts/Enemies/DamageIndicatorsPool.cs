@@ -171,10 +171,10 @@ public class DamageIndicatorsPool : MonoBehaviour
         {
             transform.position = _parent.position + _offset;
         }
-    }
-    private void LateUpdate()
-    {
-        
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
 

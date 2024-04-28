@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class WolfAI : BaseEnemy
     [SerializeField] private Animator _animator;
     [SerializeField] private float _damage, _heavyDamage;
     [SerializeField] private SplashEffectSystem _splashEffectSystem;
+    [SerializeField] private GameObject _warningSign;
 
     [SerializeField] private float _maxDistance, _minDistance;
 
@@ -22,7 +24,7 @@ public class WolfAI : BaseEnemy
     private Vector3 _prevPos = Vector3.zero;
 
     private Vector3 _preFireDirection = Vector3.zero;
-    private bool _isMovingPreFire = false;
+    private bool _isMovingPreFire = false, _isDie = false;
     private float _walkSpeed;
 
     private Vector3 _lookAtPoint;
@@ -39,6 +41,23 @@ public class WolfAI : BaseEnemy
         _findNearestTargetPattern.Initialize(this);
         _findNearestTargetPattern.PossibleTargets.Add(Target.Transform.gameObject);
         _findNearestTargetPattern.StartPattern();
+    }
+
+    public override void Die()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DieIE());
+    }
+
+    private IEnumerator DieIE()
+    {
+        _isDie = true;
+        _animator.SetInteger(STATE, (int)ArcherAnimatorStates.Die);
+        yield return null;
+        _animator.SetInteger(STATE, (int)ArcherAnimatorStates.Die);
+        yield return new WaitForSeconds(1.5f);
+        OnDestroyEvent?.Invoke();
+        Destroy(gameObject);
     }
 
     public override void Hurt(GameObject source, AttackData data)
@@ -69,6 +88,15 @@ public class WolfAI : BaseEnemy
         _splashEffectSystem.PlayEffect();
 
         base.Hurt(source, data);
+    }
+
+    private IEnumerator WarningIE()
+    {
+        _warningSign.transform.DOScale(Vector3.one * 1.1f, .3f);
+        yield return new WaitForSeconds(.25f);
+        _warningSign.transform.DOScale(Vector3.one, .2f);
+        yield return new WaitForSeconds(.7f);
+        _warningSign.transform.DOScale(Vector3.zero, .3f);
     }
 
     private bool CanSeeTargetFrom(Vector3 fromPos)
@@ -142,6 +170,7 @@ public class WolfAI : BaseEnemy
 
             if (Random.Range(0, 5) == 0) //HEAVY
             {
+                StartCoroutine(WarningIE());
                 _preFireDirection = (Target.Transform.position - transform.position).normalized;
                 yield return new WaitForSeconds(.6f);
                 _smoothLookAtPoint = false;
@@ -216,6 +245,9 @@ public class WolfAI : BaseEnemy
 
     protected override void Update()
     {
+        if (_isDie)
+            return;
+
         base.Update();
 
         if(_state == State.Waiting || _state == State.RunningAway)
