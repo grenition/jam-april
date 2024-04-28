@@ -12,6 +12,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private AudioSource[] _audioSources;
     [SerializeField] private AudioClip _buttonHoveredClip, _buttonPressedClip, _openMenuClip;
     [SerializeField] private GameObject[] _screens;
+    [SerializeField] private GameObject _blackScreen;
 
     private int _audioSourceIndex;
 
@@ -24,6 +25,16 @@ public class Menu : MonoBehaviour
             screen.SetActive(false);
         }
         _screens[0].SetActive(true);
+        StartCoroutine(StartIE());
+    }
+
+    private IEnumerator StartIE()
+    {
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        _blackScreen.SetActive(false);
     }
 
     public void OnPointerEnterOnButton(Graphic btn)
