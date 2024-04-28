@@ -108,11 +108,11 @@ public class DamageIndicatorsPool : MonoBehaviour
             _hurtBar.value = totalHealth;
         }
 
-        _healthBar.transform.localScale = Vector3.one;
         _healthBar.value = totalHealth;
 
         if(damage > 0)
         {
+            _healthBar.transform.localScale = Vector3.one;
             var clr = _mainText.color;
             clr.a = 1;
             _mainText.color = clr;

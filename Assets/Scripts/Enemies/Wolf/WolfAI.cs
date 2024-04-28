@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WolfAI : BaseEnemy
@@ -11,6 +10,8 @@ public class WolfAI : BaseEnemy
     [SerializeField] private FindNearestTargetPattern _findNearestTargetPattern;
     [SerializeField] private LayerMask _raycastLayerMask;
     [SerializeField] private Animator _animator;
+    [SerializeField] private float _damage, _heavyDamage;
+    [SerializeField] private SplashEffectSystem _splashEffectSystem;
 
     [SerializeField] private float _maxDistance, _minDistance;
 
@@ -25,7 +26,9 @@ public class WolfAI : BaseEnemy
     private float _walkSpeed;
 
     private Vector3 _lookAtPoint;
-    private bool _smoothLookAtPoint = false;
+    private bool _smoothLookAtPoint = false, _detectAttack = false;
+    private bool _isParried = false;
+    private AttackData _currentAttack;
 
     private void Start()
     {
@@ -59,6 +62,11 @@ public class WolfAI : BaseEnemy
         }
         _loopCor = StartCoroutine(LoopIE());
         _animator.SetInteger(STATE, (int)WolfAnimatorStates.Hurt);
+
+        if (_isParried)
+            data.Damage *= 2;
+
+        _splashEffectSystem.PlayEffect();
 
         base.Hurt(source, data);
     }
@@ -105,6 +113,7 @@ public class WolfAI : BaseEnemy
     {
         yield return new WaitForSeconds(.5f);
         _animator.SetInteger(STATE, (int)WolfAnimatorStates.Idle);
+        _isMovingPreFire = false;
 
         while(true)
         {
@@ -141,8 +150,12 @@ public class WolfAI : BaseEnemy
                 _animator.SetInteger(STATE, (int)WolfAnimatorStates.Run);
                 _state = State.RunningForAttack;
                 _isMovingPreFire = true;
+                _currentAttack = new(_heavyDamage, DamageType.HEAVY_ATTACK,
+                    0, AttackColliderType.Slash, 6);
+                _detectAttack = true;
 
                 yield return new WaitForSeconds(1);
+                _detectAttack = false;
                 _animator.SetInteger(STATE, (int)WolfAnimatorStates.Idle);
             }
             else //QUICK
@@ -190,11 +203,15 @@ public class WolfAI : BaseEnemy
         _isMovingPreFire = true;
         _smoothLookAtPoint = false;
         transform.LookAt(_lookAtPoint);
+        _currentAttack = new(_damage, DamageType.QUICK_ATTACK,
+                    0, AttackColliderType.Slash, 3);
+        _detectAttack = true;
     }
 
     public void AttackEnd()
     {
         _isMovingPreFire = false;
+        _detectAttack = false;
     }
 
     protected override void Update()
@@ -222,7 +239,6 @@ public class WolfAI : BaseEnemy
         {
             Controller.Move(_preFireDirection *
                 (_state == State.Attack ? _sprintSpeed : _runSpeed) * Time.deltaTime);
-            //TODO: Collision detect
         }
 
         if(_smoothLookAtPoint)
@@ -231,5 +247,31 @@ public class WolfAI : BaseEnemy
             transform.LookAt(_lookAtPoint);
             transform.rotation = Quaternion.Lerp(preQuat, transform.rotation, Time.deltaTime * 10);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.TryGetComponent<IDamageable>(out var damageable) && _detectAttack)
+        {
+            _detectAttack = false;
+            if(other.TryGetComponent<ClearBlockUser>(out var user))
+            {
+                if(user.BlockTimer <= .2f && user.BlockTimer > 0)
+                {
+                    _isMovingPreFire = false;
+                    _state = State.Waiting;
+                    _isParried = true;
+                    StartCoroutine(ParryIE());
+                    return;
+                }
+            }
+            damageable.Hurt(gameObject, _currentAttack);
+        }
+    }
+
+    private IEnumerator ParryIE()
+    {
+        yield return new WaitForSeconds(2);
+        _isParried = false;
     }
 }

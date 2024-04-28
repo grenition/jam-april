@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -8,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpHeight, _dashCooldown, _dashLength;
     [SerializeField] private GravityObject _gravityObject;
     [SerializeField] private float _worldAxisAngle;
+    [SerializeField] private LineRenderer _dashRenderer;
 
     private float _dashTimer = 0;
     private Vector3 _knockbackDirection = Vector3.zero;
@@ -44,8 +47,18 @@ public class PlayerMovement : MonoBehaviour
         {
             _dashTimer = _dashCooldown;
             moveVec = moveVec.normalized * _dashLength;
+            _dashRenderer.SetPosition(0, transform.position);
             Controller.Move(moveVec);
+            _dashRenderer.SetPosition(1, transform.position);
+            _dashRenderer.material.color = Color.white;
+            StartCoroutine(DashIE());
         }
+    }
+
+    private IEnumerator DashIE()
+    {
+        yield return new WaitForSeconds(.3f);
+        _dashRenderer.material.DOColor(new Color(1, 1, 1, 0), .6f);
     }
 
     public void Knockback(float strength, Vector3 direction)
@@ -56,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 RotateByY(Vector3 vector, float angle)
     {
+        vector.Normalize();
         angle *= Mathf.Deg2Rad;
         return new Vector3(
             vector.x * Mathf.Cos(angle) - vector.z * Mathf.Sin(angle),

@@ -103,7 +103,7 @@ public class PlayerFighting : MonoBehaviour
         var colliders = GetColliders(AllAttacks[attackIndex].ColliderType);
         foreach (var collider in colliders)
         {
-            if (collider.TryGetComponent<IDamageable>(out var idamageable))
+            if (!collider.isTrigger && collider.TryGetComponent<IDamageable>(out var idamageable))
             {
                 idamageable.Hurt(gameObject, AllAttacks[attackIndex]);
             }
