@@ -2163,6 +2163,7 @@ GameObject:
   - component: {fileID: 153092733461282491}
   - component: {fileID: 4258318205969285699}
   - component: {fileID: 4227244482135491453}
+  - component: {fileID: 8355695325078857792}
   m_Layer: 10
   m_Name: Wolf
   m_TagString: Untagged
@@ -2286,8 +2287,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 769
   _animator: {fileID: 1464434846751790086}
+  _damage: 6
+  _heavyDamage: 16
   _maxDistance: 6
   _minDistance: 3
+--- !u!65 &8355695325078857792
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6295764569118645666}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2, y: 1.2, z: 2.8}
+  m_Center: {x: 0, y: 0, z: 0.2}
 --- !u!1 &6498002961312222001
 GameObject:
   m_ObjectHideFlags: 0
