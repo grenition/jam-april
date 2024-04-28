@@ -104,11 +104,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Jumping
-        if(CanJump && Input.GetKeyDown(JUMP_KEY) && _gravityObject.OnLand && !OnAnimation && !Stats.IsStuck)
-        {
-            _gravityObject.VelocityY = Mathf.Sqrt(2 * GravityObject.GRAVITY * _jumpHeight);
-            Animator.SetState(PlayerAnimatorState.Jump);
-        }
+        //if(CanJump && Input.GetKeyDown(JUMP_KEY) && _gravityObject.OnLand && !OnAnimation && !Stats.IsStuck)
+        //{
+        //    _gravityObject.VelocityY = Mathf.Sqrt(2 * GravityObject.GRAVITY * _jumpHeight);
+        //    Animator.SetState(PlayerAnimatorState.Jump);
+        //}
 
         moveVec += Vector3.up * _gravityObject.VelocityY;
 
