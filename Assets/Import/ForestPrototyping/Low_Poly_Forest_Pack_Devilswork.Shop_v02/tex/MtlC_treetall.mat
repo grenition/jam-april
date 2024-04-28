@@ -92,7 +92,7 @@ Material:
     m_Floats:
     - _AlbedoDistortionPower: 0.99
     - _AlbedoDistortionScale: 10
-    - _AlbedoNoisePower: 0.35
+    - _AlbedoNoisePower: 0.162
     - _AlbedoNoiseScale: 457.45
     - _AlbedoNoiseScale_1: 100
     - _AlphaClip: 0
@@ -115,6 +115,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NoisePower: 0.01
     - _NormalsSensitivity: 0.065
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -127,15 +128,15 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _ThicknessNoiseScale: 0.1
+    - _ThicknessNoiseScale: 0.4
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _outlineThickness: 1
+    - _outlineThickness: 1.7
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 0.14417942, g: 0.19117121, b: 0.2264151, a: 0}
     - _RemapNoise: {r: 0, g: 1, b: 0, a: 0.01}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

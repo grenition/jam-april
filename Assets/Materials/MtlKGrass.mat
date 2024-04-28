@@ -109,7 +109,7 @@ Material:
     m_Floats:
     - _AlbedoDistortionPower: 0.99
     - _AlbedoDistortionScale: 10
-    - _AlbedoNoisePower: 0.266
+    - _AlbedoNoisePower: 0.24
     - _AlbedoNoiseScale: 909.7
     - _AlphaClip: 0
     - _AlphaToMask: 0
@@ -143,9 +143,9 @@ Material:
     - _MossTranslate1: 0
     - _MossTranslate2: 5
     - _MossYOffset: -0.35
-    - _NoisePower: 0.1
+    - _NoisePower: 0.01
     - _NormalSensivity: 0.5
-    - _NormalsSensitivity: 0.369
+    - _NormalsSensitivity: 0.196
     - _NormalsSensivity: 0.593
     - _OcclusionStrength: 1
     - _OutlineThicknessNoiseScale: 21.07
@@ -160,17 +160,17 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _ThicknessNoiseScale: 46.4
+    - _ThicknessNoiseScale: 238.99
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _outlineThickness: 2.12
+    - _outlineThickness: 5.4
     m_Colors:
-    - _BaseColor: {r: 0.5449107, g: 0.6320754, b: 0.4203898, a: 1}
+    - _BaseColor: {r: 0.3596657, g: 0.4056604, b: 0.29276434, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MossColor: {r: 0.42038977, g: 0.6320754, b: 0.48176092, a: 0}
     - _MossOutlineColor: {r: 0.28484336, g: 0.34905657, b: 0.34447438, a: 0}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.14796193, g: 0.23584908, b: 0.17278294, a: 1}
     - _RemapNoise: {r: 0, g: 1, b: 0.999, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _StoneColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
