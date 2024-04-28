@@ -14,8 +14,10 @@ public enum AudioSourceChannel
 public class AudioController : MonoBehaviour
 {
     public AudioSource Source => _voiceSource;
+    public AudioSource AdditionalSource => _voiceSource2;
 
     [SerializeField] private AudioSource _voiceSource;
+    [SerializeField] private AudioSource _voiceSource2;
     [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _musicSource2;
@@ -44,11 +46,10 @@ public class AudioController : MonoBehaviour
         switch (sourceType)
         {
             case AudioSourceChannel.voices:
-                _voiceSource.Stop();
                 _voiceSource.PlayOneShot(clip);
                 break;
             case AudioSourceChannel.music:
-                _voiceSource.PlayOneShot(clip);
+                _musicSource.PlayOneShot(clip);
                 break;
             case AudioSourceChannel.sfx:
                 _sfxSource.PlayOneShot(clip);

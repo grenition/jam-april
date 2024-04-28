@@ -18,7 +18,7 @@ public class SpeechSource : MonoBehaviour
     private UISubtitles _subtitles;
     private bool _isPlayed = false;
 
-    private readonly float _delayBetweenClips = 0.3f;
+    private readonly float _delayBetweenClips = 1f;
 
     private void Start()
     {
@@ -51,11 +51,11 @@ public class SpeechSource : MonoBehaviour
     {
         yield return new WaitForSeconds(speechData.startTime);
         _subtitles?.DrawSubtitles(speechData.speechClip.subtitles);
-        foreach (var clip in speechData.speechClip.clips)
-        {
-            _controller?.PlayOneShot(clip, AudioSourceChannel.voices);
-            yield return new WaitForSeconds(_delayBetweenClips);
-        }
+
+        _controller?.PlayOneShot(speechData.speechClip.clips[0], AudioSourceChannel.voices);
+        yield return new WaitForSeconds(_delayBetweenClips);
+        if(speechData.speechClip.clips.Length >= 2)
+            _controller?.AdditionalSource.PlayOneShot(speechData.speechClip.clips[1]);
     }
     private IEnumerator CallSpeechEnd(float delay)
     {
