@@ -7,7 +7,8 @@ using static Unity.VisualScripting.Member;
 public enum AudioSourceChannel
 {
     voices,
-    music
+    music,
+    sfx
 }
 
 public class AudioController : MonoBehaviour
@@ -15,6 +16,7 @@ public class AudioController : MonoBehaviour
     public AudioSource Source => _voiceSource;
 
     [SerializeField] private AudioSource _voiceSource;
+    [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _musicSource2;
 
@@ -47,6 +49,9 @@ public class AudioController : MonoBehaviour
                 break;
             case AudioSourceChannel.music:
                 _voiceSource.PlayOneShot(clip);
+                break;
+            case AudioSourceChannel.sfx:
+                _sfxSource.PlayOneShot(clip);
                 break;
         }
     }

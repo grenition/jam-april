@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Project/DialogueSystem/SpeechClip")]
 public class SpeechClip : ScriptableObject
 {
-    public AudioClip clip;
+    public AudioClip[] clips;
     [TextArea] public string subtitles;
 }
