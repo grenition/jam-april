@@ -111,6 +111,7 @@ Material:
     - _AlbedoNoiseScale: 177.22
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _BaseColorPower: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -118,7 +119,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthSensitivity: 0.422
+    - _DepthSensitivity: 0.549
     - _DepthSensivity: 0.503
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -140,6 +141,7 @@ Material:
     - _MossTranslate1: 0
     - _MossTranslate2: 5
     - _MossYOffset: -0.35
+    - _NoisePower: 0.1
     - _NormalSensivity: 0.602
     - _NormalsSensitivity: 0.486
     - _NormalsSensivity: 0.897
@@ -149,6 +151,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ScreenScale: 614.07
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -160,7 +163,7 @@ Material:
     - _ZWrite: 1
     - _outlineThickness: 3.3
     m_Colors:
-    - _BaseColor: {r: 0.5942001, g: 0.6509804, b: 0.5176471, a: 1}
+    - _BaseColor: {r: 0.783456, g: 0.8584906, b: 0.6762638, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MossColor: {r: 0.42038977, g: 0.6320754, b: 0.48176092, a: 0}
