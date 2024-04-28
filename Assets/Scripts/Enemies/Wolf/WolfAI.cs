@@ -62,6 +62,9 @@ public class WolfAI : BaseEnemy
 
     public override void Hurt(GameObject source, AttackData data)
     {
+        if (_isDie)
+            return;
+
         if(_findNearestTargetPattern.Working)
         {
             foreach(var target in _findNearestTargetPattern.PossibleTargets)
