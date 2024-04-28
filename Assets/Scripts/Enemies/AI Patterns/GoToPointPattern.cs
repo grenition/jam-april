@@ -72,7 +72,9 @@ public class GoToPointPattern : EnemyPattern
         direction = direction.normalized * Enemy.Speed;
         direction.y = 0;
         Enemy.Controller.Move(direction * Time.deltaTime);
+        Quaternion old = transform.rotation;
         transform.LookAt(transform.position + direction * 10);
+        transform.rotation = Quaternion.Lerp(old, transform.rotation, Time.deltaTime * 5);
 
         float dist = Vector3.Distance(transform.position, _nextPointToMove);
         if (_prevDistanceToPoint == -1 || dist < _prevDistanceToPoint)

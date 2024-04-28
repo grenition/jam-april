@@ -20,6 +20,7 @@ public class DamageIndicator : MonoBehaviour
     {
         _speed = _maxSpeed;
         transform.position = pos;
+        transform.localScale = Vector3.one * .2f;
         gameObject.SetActive(true);
         _text = GetComponent<TMP_Text>();
         _text.color = color;
@@ -31,14 +32,14 @@ public class DamageIndicator : MonoBehaviour
         transform.position += _moveDirection * Random.Range(0f, 1f);
         transform.position += Vector3.forward * Random.Range(-1f, 1f);
         _isActive = true;
-        StartCoroutine(TimerIE(new Color(color.r, color.g, color.b, 0)));
+        StartCoroutine(TimerIE());
     }
 
-    private IEnumerator TimerIE(Color invisibleColor)
+    private IEnumerator TimerIE()
     {
         yield return new WaitForSeconds(LIFE_TIME / 2);
 
-        _text.DOColor(invisibleColor, LIFE_TIME / 2);
+        _text.transform.DOScale(Vector3.zero, LIFE_TIME / 2);
 
         yield return new WaitForSeconds(LIFE_TIME / 2);
         _isActive = false;
