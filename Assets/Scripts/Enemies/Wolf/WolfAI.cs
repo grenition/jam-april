@@ -113,6 +113,7 @@ public class WolfAI : BaseEnemy
     {
         yield return new WaitForSeconds(.5f);
         _animator.SetInteger(STATE, (int)WolfAnimatorStates.Idle);
+        _isMovingPreFire = false;
 
         while(true)
         {
@@ -154,6 +155,7 @@ public class WolfAI : BaseEnemy
                 _detectAttack = true;
 
                 yield return new WaitForSeconds(1);
+                _detectAttack = false;
                 _animator.SetInteger(STATE, (int)WolfAnimatorStates.Idle);
             }
             else //QUICK
@@ -209,6 +211,7 @@ public class WolfAI : BaseEnemy
     public void AttackEnd()
     {
         _isMovingPreFire = false;
+        _detectAttack = false;
     }
 
     protected override void Update()
