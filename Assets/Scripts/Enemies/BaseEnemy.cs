@@ -7,7 +7,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 {
     public UnityEvent OnDestroyEvent;
 
-    [SerializeField] private float _maxHealth, _speed;
+    [SerializeField] protected float _maxHealth, _speed;
     [SerializeField] private float _knockbackResistance;
     [SerializeField] private GravityObject _gravityObject;
     [SerializeField] private DamageIndicatorsPool _damageIndicatorsPool;
@@ -21,7 +21,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 
     public CharacterController Controller { get; private set; }
 
-    public float Health { get; set; }
+    public float Health { get; private set; }
 
     public float MaxHealth => _maxHealth;
     public float Speed => _speed;

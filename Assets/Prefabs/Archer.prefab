@@ -4490,7 +4490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3eca82364c5f24ba485670872ac174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 25
+  OnDestroyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _maxHealth: 20
   _speed: 3
   _knockbackResistance: 2
   _gravityObject: {fileID: 7167560893400722181}
