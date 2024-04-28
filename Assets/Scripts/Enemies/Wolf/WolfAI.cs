@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WolfAI : BaseEnemy
@@ -12,6 +11,7 @@ public class WolfAI : BaseEnemy
     [SerializeField] private LayerMask _raycastLayerMask;
     [SerializeField] private Animator _animator;
     [SerializeField] private float _damage, _heavyDamage;
+    [SerializeField] private SplashEffectSystem _splashEffectSystem;
 
     [SerializeField] private float _maxDistance, _minDistance;
 
@@ -65,6 +65,8 @@ public class WolfAI : BaseEnemy
 
         if (_isParried)
             data.Damage *= 2;
+
+        _splashEffectSystem.PlayEffect();
 
         base.Hurt(source, data);
     }
@@ -251,11 +253,12 @@ public class WolfAI : BaseEnemy
             _detectAttack = false;
             if(other.TryGetComponent<ClearBlockUser>(out var user))
             {
-                if(user.BlockTimer <= .2f)
+                if(user.BlockTimer <= .2f && user.BlockTimer > 0)
                 {
                     _isMovingPreFire = false;
                     _state = State.Waiting;
                     _isParried = true;
+                    StartCoroutine(ParryIE());
                     return;
                 }
             }
