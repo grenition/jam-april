@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     [SerializeField] private float _hurtStamina, _stuckTime, _stuckImmuneTime;
     [SerializeField] private float _knockbackResistance;
     [SerializeField] private float _shieldStamina, _shieldStaminaSpeed;
+    [SerializeField] private AudioSource _hurtSource, _blockSource;
 
     [SerializeField] private Slider _staminaBar, _staminaBar2;
 
@@ -69,6 +70,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Hurt(GameObject source, AttackData data)
     {
+        if(UnityEngine.Random.Range(0, 5) == 0)
+        {
+            _hurtSource.Play();
+        }
         Hurted?.Invoke();
         if (Fighting.IsBlocking && IsLookingForObject(source.transform))
         {
@@ -79,6 +84,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
             }
             else
             {
+                _blockSource.Play();
                 data.Damage /= 10;
             }
         }

@@ -69,7 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 RotateByY(Vector3 vector, float angle)
     {
-        vector.Normalize();
+        if (vector.x != 0 && vector.z != 0)
+            vector *= .7f;
         angle *= Mathf.Deg2Rad;
         return new Vector3(
             vector.x * Mathf.Cos(angle) - vector.z * Mathf.Sin(angle),
