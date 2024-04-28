@@ -47,10 +47,12 @@ public class GameLifetime : MonoBehaviour
     }
     public virtual void ExitMenu()
     {
+        Unpause();
         SceneManager.LoadScene(_mainMenu);
     }
     public virtual void EndGame()
     {
+        Unpause();
         SceneManager.LoadScene(2);
     }
     public virtual void ReloadGame()
