@@ -1976,6 +1976,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2531686709603847365, guid: 0a7476ed8ac8b4443b82f673b1d1e30c,
+        type: 3}
+      propertyPath: _worldAxisAngle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2906041199654059131, guid: 0a7476ed8ac8b4443b82f673b1d1e30c,
         type: 3}
       propertyPath: m_Name
@@ -4020,6 +4025,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b07e2332da68247baab2682d599782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDestroyEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _maxHealth: 70
   _speed: 4
   _knockbackResistance: 1.2
@@ -4027,6 +4035,12 @@ MonoBehaviour:
   _damageIndicatorsPool: {fileID: 6922635922305705593}
   _hurtStamina: 1
   _stuckTime: 2
+  _runSpeed: 0
+  _goToPointPattern: {fileID: 0}
+  _followTargetPattern: {fileID: 0}
+  _findNearestTargetPattern: {fileID: 0}
+  _maxDistance: 0
+  _minDistance: 0
 --- !u!4 &8750529609066578235
 Transform:
   m_ObjectHideFlags: 0
