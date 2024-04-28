@@ -107,6 +107,7 @@ public class ArcherAI : BaseEnemy
         yield return new WaitForSeconds(1.5f);
         OnDestroyEvent?.Invoke();
         Destroy(gameObject);
+        OnDestroyEvent?.Invoke();
     }
 
     public override void Hurt(GameObject source, AttackData data)
