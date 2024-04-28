@@ -106,6 +106,7 @@ public class ArcherAI : BaseEnemy
         _animator.SetInteger(STATE, (int)ArcherAnimatorStates.Die);
         yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
+        OnDestroyEvent?.Invoke();
     }
 
     public override void Hurt(GameObject source, AttackData data)
