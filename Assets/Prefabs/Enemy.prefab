@@ -658,7 +658,7 @@ MonoBehaviour:
   OnDestroyEvent:
     m_PersistentCalls:
       m_Calls: []
-  _maxHealth: 200
+  _maxHealth: 5
   _speed: 3
   _knockbackResistance: 1.1
   _gravityObject: {fileID: 5625018655560865653}

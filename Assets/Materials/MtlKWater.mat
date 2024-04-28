@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MtlKGrass
-  m_Shader: {fileID: -6465566751694194690, guid: 319aa0808e3b9d04099de61cec5e76b7,
+  m_Name: MtlKWater
+  m_Shader: {fileID: -6465566751694194690, guid: f2d46259b2258ba449e9f62baaa0865a,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -121,7 +121,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthSensitivity: 0.941
+    - _DepthSensitivity: 0.933
     - _DepthSensivity: 0.506
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -163,17 +163,14 @@ Material:
     - _ThicknessNoiseScale: 238.99
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _outlineThickness: 3.81
-    - _spotsOverlay: 0.056
-    - _spotsPower: 1.44
-    - _spotsScale: 0.03
+    - _outlineThickness: 2.28
     m_Colors:
-    - _BaseColor: {r: 0.3596657, g: 0.4056604, b: 0.29276434, a: 1}
+    - _BaseColor: {r: 0.3469651, g: 0.4272613, b: 0.6509434, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MossColor: {r: 0.42038977, g: 0.6320754, b: 0.48176092, a: 0}
     - _MossOutlineColor: {r: 0.28484336, g: 0.34905657, b: 0.34447438, a: 0}
-    - _OutlineColor: {r: 0.14796193, g: 0.23584908, b: 0.17278294, a: 1}
+    - _OutlineColor: {r: 0.18356179, g: 0.18398133, b: 0.23584908, a: 1}
     - _RemapNoise: {r: 0, g: 1, b: 0.999, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _StoneColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}

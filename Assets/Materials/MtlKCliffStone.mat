@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MtlKGrass
-  m_Shader: {fileID: -6465566751694194690, guid: 319aa0808e3b9d04099de61cec5e76b7,
+  m_Name: MtlKCliffStone
+  m_Shader: {fileID: -6465566751694194690, guid: f2d46259b2258ba449e9f62baaa0865a,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -109,8 +109,8 @@ Material:
     m_Floats:
     - _AlbedoDistortionPower: 0.99
     - _AlbedoDistortionScale: 10
-    - _AlbedoNoisePower: 0.24
-    - _AlbedoNoiseScale: 909.7
+    - _AlbedoNoisePower: 1
+    - _AlbedoNoiseScale: 354
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _BaseColorPower: 1
@@ -121,7 +121,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthSensitivity: 0.941
+    - _DepthSensitivity: 0.844
     - _DepthSensivity: 0.506
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -145,7 +145,7 @@ Material:
     - _MossYOffset: -0.35
     - _NoisePower: 0.01
     - _NormalSensivity: 0.5
-    - _NormalsSensitivity: 0.196
+    - _NormalsSensitivity: 0.369
     - _NormalsSensivity: 0.593
     - _OcclusionStrength: 1
     - _OutlineThicknessNoiseScale: 21.07
@@ -160,21 +160,18 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _ThicknessNoiseScale: 238.99
+    - _ThicknessNoiseScale: 64.33
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _outlineThickness: 3.81
-    - _spotsOverlay: 0.056
-    - _spotsPower: 1.44
-    - _spotsScale: 0.03
+    - _outlineThickness: 3.3
     m_Colors:
-    - _BaseColor: {r: 0.3596657, g: 0.4056604, b: 0.29276434, a: 1}
+    - _BaseColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MossColor: {r: 0.42038977, g: 0.6320754, b: 0.48176092, a: 0}
     - _MossOutlineColor: {r: 0.28484336, g: 0.34905657, b: 0.34447438, a: 0}
-    - _OutlineColor: {r: 0.14796193, g: 0.23584908, b: 0.17278294, a: 1}
-    - _RemapNoise: {r: 0, g: 1, b: 0.999, a: 1}
+    - _OutlineColor: {r: 0.16798684, g: 0.19472411, b: 0.23584908, a: 1}
+    - _RemapNoise: {r: 0, g: 1, b: 0, a: 0.52}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _StoneColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _Vector4: {r: 0, g: 1, b: 0.6, a: 1}
