@@ -26,6 +26,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        _maxHealth = Difficulty.GetPlayerHealth();
         _curHealth = _maxHealth;
         _damageIndicators.SetParentAndOffset(transform, Vector3.up);
         Movement = FindObjectOfType<PlayerMovement>();
