@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -117,6 +118,9 @@ public class DamageIndicatorsPool : MonoBehaviour
             _mainText.text = $"-{Mathf.RoundToInt(TotalDamage)}";
             ColorMainText();
             _damageCountTime = DAMAGE_COUNT_TIME;
+            _mainText.transform.DOKill();
+            _mainText.transform.localScale = Vector3.one * 1.5f;
+            _mainText.transform.DOScale(Vector3.one, .3f);
         }
         else
         {
