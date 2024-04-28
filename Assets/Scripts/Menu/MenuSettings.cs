@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -7,11 +8,12 @@ public class MenuSettings : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown _graphicsDropDown;
     [SerializeField] private AudioMixer _audioMixer;
-    [SerializeField] private Slider _masterSlider, _sfxSlider, _musicSlider;
+    [SerializeField] private Slider _masterSlider, _sfxSlider, _musicSlider, _voiceSlider;
 
     public const string MASTER_VOLUME = "MasterVolume";
     public const string SFX_VOLUME = "SFXVolume";
     public const string MUSIC_VOLUME = "MusicVolume";
+    public const string VOICE_VOLUME = "VoiceVolume";
 
     public void GraphicsDropdownUpdated(int index)
     {
@@ -36,6 +38,26 @@ public class MenuSettings : MonoBehaviour
         {
             _musicSlider.value = value;
         }
+        if(_audioMixer.GetFloat(VOICE_VOLUME, out value))
+        {
+            _voiceSlider.value = value;
+        }
+    }
+
+    public void OnDropdownClick()
+    {
+        StartCoroutine(DropdownIE());
+    }
+
+    private IEnumerator DropdownIE()
+    {
+        yield return null;
+        var go = GameObject.Find("Dropdown List");
+        if(go != null)
+        {
+            var rect = go.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(rect.sizeDelta.x, 140);
+        }
     }
 
     public void MasterVolumeChanged(float value)
@@ -51,5 +73,10 @@ public class MenuSettings : MonoBehaviour
     public void MusicVolumeChanged(float value)
     {
         _audioMixer.SetFloat(MUSIC_VOLUME, value);
+    }
+
+    public void VoiceVolumeChanged(float value)
+    {
+        _audioMixer.SetFloat(VOICE_VOLUME, value);
     }
 }

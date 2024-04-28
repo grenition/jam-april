@@ -21,6 +21,7 @@ public class RedCap : MonoBehaviour, IDamageable
         Instance = this;
         _agent = GetComponent<NavMeshAgent>();
         _pool.Initialize(_maxHealth);
+        _maxHealth = Mathf.Max(Difficulty.GetPlayerHealth(), 120);
         _curHealth = _maxHealth;
     }
 
@@ -33,6 +34,8 @@ public class RedCap : MonoBehaviour, IDamageable
         if(_curHealth <= 0)
         {
             Died?.Invoke();
+            var game = ServiceLocator.Get<GameLifetime>();
+            game?.Loose(LooseReason.redCapDie);
             Destroy(gameObject);
         }
     }
