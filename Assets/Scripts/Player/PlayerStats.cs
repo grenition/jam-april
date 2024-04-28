@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private float _curHealth, _curShieldStamina;
     private Coroutine _stuckCor;
+    private GameLifetime _gameLifetime;
 
     public bool IsStuck { get; private set; }
     public bool IsImmuneToStuck { get; private set; }
@@ -34,6 +35,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _staminaBar.value = 0f;
         _staminaBar2.maxValue = _shieldStamina;
         _staminaBar2.value = 0f;
+
+        _gameLifetime = ServiceLocator.Get<GameLifetime>();
     }
 
     public void Stuck()
@@ -125,6 +128,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         StopAllCoroutines();
         Destroy(gameObject);
+
+        _gameLifetime?.Loose(LooseReason.die);
     }
 
     public void Heal(float value)

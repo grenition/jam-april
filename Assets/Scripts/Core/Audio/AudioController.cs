@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using static Unity.VisualScripting.Member;
 
 public enum AudioSourceChannel
 {
@@ -13,7 +15,12 @@ public class AudioController : MonoBehaviour
     public AudioSource Source => _voiceSource;
 
     [SerializeField] private AudioSource _voiceSource;
-    [SerializeField] private AudioSource _musicSorce;
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _musicSource2;
+
+    [SerializeField] private float _musicFadeTime = 2f;
+
+    private AudioSource _activeMusicSource;
 
     private void Awake()
     {
@@ -42,5 +49,41 @@ public class AudioController : MonoBehaviour
                 _voiceSource.PlayOneShot(clip);
                 break;
         }
+    }
+    public void PlayMusic(AudioClip music)
+    {
+        var source = _musicSource;
+        var additionalSource = _musicSource2;
+
+        if (_activeMusicSource == _musicSource)
+        {
+            source = _musicSource2;
+            additionalSource = _musicSource;
+        }
+
+        _activeMusicSource = source;
+
+        source.DOKill();
+        additionalSource.DOKill();
+
+        source.clip = music;
+        source.Play();
+        source.DOFade(1f, _musicFadeTime);
+
+        additionalSource.DOFade(0f, _musicFadeTime)
+            .OnComplete(()=> additionalSource.Stop());
+    }
+    public void StopMusic()
+    {
+        var source = _musicSource;
+        var additionalSource = _musicSource2;
+
+        source.DOKill();
+        additionalSource.DOKill();
+
+        source.DOFade(0f, _musicFadeTime)
+            .OnComplete(() => source.Stop());
+        additionalSource.DOFade(0f, _musicFadeTime)
+            .OnComplete(() => additionalSource.Stop());
     }
 }

@@ -15,6 +15,7 @@ public class DamageIndicator : MonoBehaviour
 
     private Vector3 _moveDirection = Vector3.right;
     private bool _isActive = false;
+    private Camera _mainCamera;
 
     public void Initialize(float damage, Vector3 pos, Color color)
     {
@@ -34,7 +35,10 @@ public class DamageIndicator : MonoBehaviour
         _isActive = true;
         StartCoroutine(TimerIE());
     }
-
+    private void OnEnable()
+    {
+        _mainCamera = Camera.main;
+    }
     private IEnumerator TimerIE()
     {
         yield return new WaitForSeconds(LIFE_TIME / 2);
@@ -53,5 +57,9 @@ public class DamageIndicator : MonoBehaviour
             transform.position += _moveDirection * _speed * Time.deltaTime;
             _speed = Mathf.Clamp(_speed + _acceleration * Time.deltaTime, 0, 100);
         }
+    }
+    private void LateUpdate()
+    {
+        transform.forward = _mainCamera.transform.forward;
     }
 }

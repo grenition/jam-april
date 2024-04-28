@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
 public class BaseEnemy : MonoBehaviour, IDamageable
 {
+    public UnityEvent OnDestroyEvent;
+
     [SerializeField] private float _maxHealth, _speed;
     [SerializeField] private float _knockbackResistance;
     [SerializeField] private GravityObject _gravityObject;
@@ -18,7 +21,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 
     public CharacterController Controller { get; private set; }
 
-    public float Health { get; protected set; }
+    public float Health { get; set; }
 
     public float MaxHealth => _maxHealth;
     public float Speed => _speed;
@@ -106,6 +109,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
     {
         StopAllCoroutines();
         Destroy(gameObject);
+        OnDestroyEvent?.Invoke();
     }
 
     protected virtual void Update()

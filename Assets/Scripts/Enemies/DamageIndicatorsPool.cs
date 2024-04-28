@@ -20,6 +20,7 @@ public class DamageIndicatorsPool : MonoBehaviour
 
     private Transform _parent;
     private Vector3 _offset;
+    private Camera _mainCamera;
 
     public float TotalDamage { get; private set; }
 
@@ -170,6 +171,10 @@ public class DamageIndicatorsPool : MonoBehaviour
         {
             transform.position = _parent.position + _offset;
         }
+    }
+    private void LateUpdate()
+    {
+        
     }
 }
 

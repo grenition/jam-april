@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RedCapSpeechTask : Task
@@ -35,11 +34,11 @@ public class RedCapSpeechTask : Task
         var redCapLifetime = ServiceLocator.Get<RedCapLifetime>();
         var animations = redCapLifetime.RedCap.GetComponent<RedCapAnimations>();
 
-        animations?.SetAnimState(RedCapAnimtionState.talking);
+        animations?.SetAnimState(RedCapAnimationState.talking);
 
         yield return new WaitForSeconds(_speechSource.Speech.duration);
 
-        animations?.SetAnimState(RedCapAnimtionState.none);
+        animations?.SetAnimState(RedCapAnimationState.none);
 
         CompleteTask();
     }
