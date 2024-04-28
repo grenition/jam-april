@@ -7,6 +7,7 @@ public class FightTask : Task
     [SerializeField] private RedCapAnimationState _redCapState = RedCapAnimationState.none;
     [SerializeField] private float _animationDelay = 2f;
     [SerializeField] private float _fightTime = 20f;
+    [SerializeField] private float _maxFightTime = 120f;
     [SerializeField] private float _healDelayAfterTask = 10f;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private AudioClip _fightMusic;
@@ -16,6 +17,7 @@ public class FightTask : Task
             return;
 
         StartCoroutine(TaskCoroutine());
+        StartCoroutine(FightTimeCoroutine());
         base.StartTask();
     }
     public override void ForceStopTask()
@@ -26,6 +28,15 @@ public class FightTask : Task
     public override void CompleteTask()
     {
         base.CompleteTask();
+    }
+    private IEnumerator FightTimeCoroutine()
+    {
+        yield return new WaitForSeconds(_maxFightTime);
+        if (IsTaskActive)
+        {
+            CompleteTask();
+            StopAllCoroutines();
+        }
     }
     private IEnumerator TaskCoroutine()
     {

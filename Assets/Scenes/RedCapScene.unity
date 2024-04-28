@@ -3876,6 +3876,23 @@ PrefabInstance:
       propertyPath: _maxEnemiesCount
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8887040268109769802, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 5235028892006186136, guid: 3ccf02da61529984ca4958be8a6b028d,
+        type: 3}
     - target: {fileID: 9161732235136383736, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
         type: 3}
       propertyPath: m_Icon
@@ -4935,6 +4952,23 @@ PrefabInstance:
       propertyPath: _maxEnemiesCount
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8887040268109769802, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 5235028892006186136, guid: 3ccf02da61529984ca4958be8a6b028d,
+        type: 3}
     - target: {fileID: 9161732235136383736, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
         type: 3}
       propertyPath: m_Icon
@@ -11634,6 +11668,23 @@ PrefabInstance:
       propertyPath: _maxEnemiesCount
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8887040268109769802, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 5235028892006186136, guid: 3ccf02da61529984ca4958be8a6b028d,
+        type: 3}
     - target: {fileID: 9161732235136383736, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
         type: 3}
       propertyPath: m_Icon
@@ -15466,6 +15517,23 @@ PrefabInstance:
       propertyPath: _maxEnemiesCount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8887040268109769802, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 5235028892006186136, guid: 3ccf02da61529984ca4958be8a6b028d,
+        type: 3}
     - target: {fileID: 9161732235136383736, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
         type: 3}
       propertyPath: m_Icon
@@ -20612,6 +20680,17 @@ PrefabInstance:
       propertyPath: _maxEnemiesCount
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810764888062513857, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
+        type: 3}
+      propertyPath: _enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8887040268109769802, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
     - target: {fileID: 9161732235136383736, guid: 8b98a9b2a8b562f46ba49b7fa1b1d0f4,
         type: 3}
       propertyPath: m_Icon
@@ -20826,7 +20905,7 @@ PrefabInstance:
     - target: {fileID: 1732566932144492536, guid: 1c458281a7a62014ca3b9fefe7b65125,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 186.67674
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1732566932144492536, guid: 1c458281a7a62014ca3b9fefe7b65125,
         type: 3}

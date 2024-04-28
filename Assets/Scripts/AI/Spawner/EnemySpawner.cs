@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     public IReadOnlyList<BaseEnemy> Enemies => _enemies;
     public bool IsWorking {  get; private set; }  
 
-    [SerializeField] private BaseEnemy _enemyPrefab;
+    [SerializeField] private BaseEnemy[] _enemyPrefabs;
     [SerializeField] private float _spawnCooldown = 2f;
     [SerializeField] private int _maxEnemiesCount = 6;
     [SerializeField] private float _enemiesHealth = 50f;
@@ -44,7 +44,8 @@ public class EnemySpawner : MonoBehaviour
 
             Vector3 point = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
 
-            var enemy = Instantiate(_enemyPrefab, point, Quaternion.identity);
+            var enemy = Instantiate(_enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)],
+                point, Quaternion.identity);
             enemy.Health = _enemiesHealth;
 
             _enemies.Add(enemy);
