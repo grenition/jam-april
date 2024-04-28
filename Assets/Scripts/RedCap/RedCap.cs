@@ -33,6 +33,8 @@ public class RedCap : MonoBehaviour, IDamageable
         if(_curHealth <= 0)
         {
             Died?.Invoke();
+            var game = ServiceLocator.Get<GameLifetime>();
+            game?.Loose(LooseReason.redCapDie);
             Destroy(gameObject);
         }
     }
