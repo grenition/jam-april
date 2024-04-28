@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class InGameUI : MonoBehaviour
 {
+    private Camera _mainCamera;
     private void Start()
     {
-        var forward = Camera.main.transform.forward;
-        transform.LookAt(transform.position + forward);
+        _mainCamera = Camera.main;
+    }
+    private void LateUpdate()
+    {
+        transform.forward = _mainCamera.transform.forward;
     }
 }

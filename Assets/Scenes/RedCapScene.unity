@@ -8807,6 +8807,7 @@ MonoBehaviour:
   _redCapState: 1
   _animationDelay: 2
   _fightTime: 30
+  _maxFightTime: 120
   _healDelayAfterTask: 10
   _enemySpawner: {fileID: 511771470}
   _fightMusic: {fileID: 8300000, guid: 82763a7a9bd50684a80011f0420f5ef4, type: 3}
@@ -14426,6 +14427,7 @@ MonoBehaviour:
   _redCapState: 1
   _animationDelay: 2
   _fightTime: 30
+  _maxFightTime: 120
   _healDelayAfterTask: 10
   _enemySpawner: {fileID: 606017081}
   _fightMusic: {fileID: 8300000, guid: 82763a7a9bd50684a80011f0420f5ef4, type: 3}
@@ -15285,6 +15287,7 @@ MonoBehaviour:
   _redCapState: 1
   _animationDelay: 2
   _fightTime: 30
+  _maxFightTime: 120
   _healDelayAfterTask: 10
   _enemySpawner: {fileID: 1220895362}
   _fightMusic: {fileID: 8300000, guid: 82763a7a9bd50684a80011f0420f5ef4, type: 3}
@@ -17883,6 +17886,98 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1001 &2084558124
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -127.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -73.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119958592965236473, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 728852074794477255, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 728852074794477255, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013679742410736049, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813358307796883421, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813358307796883421, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3693163968960207474, guid: a9e78a651a76f2344ba673b9f3bcf670,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: a9e78a651a76f2344ba673b9f3bcf670, type: 3}
 --- !u!1 &2100998383
 GameObject:
   m_ObjectHideFlags: 0
@@ -18601,6 +18696,7 @@ MonoBehaviour:
   _redCapState: 3
   _animationDelay: 2
   _fightTime: 30
+  _maxFightTime: 120
   _healDelayAfterTask: 10
   _enemySpawner: {fileID: 4692143667337511476}
   _fightMusic: {fileID: 8300000, guid: 82763a7a9bd50684a80011f0420f5ef4, type: 3}
@@ -20905,7 +21001,7 @@ PrefabInstance:
     - target: {fileID: 1732566932144492536, guid: 1c458281a7a62014ca3b9fefe7b65125,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 186.67674
       objectReference: {fileID: 0}
     - target: {fileID: 1732566932144492536, guid: 1c458281a7a62014ca3b9fefe7b65125,
         type: 3}
@@ -21086,3 +21182,4 @@ SceneRoots:
   - {fileID: 5463073718795617181}
   - {fileID: 2100998384}
   - {fileID: 221870029}
+  - {fileID: 2084558124}
