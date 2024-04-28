@@ -4405,7 +4405,6 @@ GameObject:
   - component: {fileID: 4456208414029298360}
   - component: {fileID: 650603112245016340}
   - component: {fileID: 7167560893400722181}
-  - component: {fileID: 1104555587601606045}
   - component: {fileID: 5235028892006186136}
   - component: {fileID: 6219180242745173603}
   m_Layer: 10
@@ -4479,18 +4478,6 @@ MonoBehaviour:
   _floorColliderMask:
     serializedVersion: 2
     m_Bits: 257
---- !u!114 &1104555587601606045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130929548413633458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c374e3462038db48bf316a2b5bdc4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5235028892006186136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4503,7 +4490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3eca82364c5f24ba485670872ac174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 25
+  OnDestroyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _maxHealth: 20
   _speed: 3
   _knockbackResistance: 2
   _gravityObject: {fileID: 7167560893400722181}

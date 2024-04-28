@@ -13,7 +13,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private BaseEnemy[] _enemyPrefabs;
     [SerializeField] private float _spawnCooldown = 2f;
     [SerializeField] private int _maxEnemiesCount = 6;
-    [SerializeField] private float _enemiesHealth = 50f;
     [SerializeField] private Transform[] _spawnPoints;
 
     private List<BaseEnemy> _enemies = new();
@@ -46,7 +45,6 @@ public class EnemySpawner : MonoBehaviour
 
             var enemy = Instantiate(_enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)],
                 point, Quaternion.identity);
-            enemy.Health = _enemiesHealth;
 
             _enemies.Add(enemy);
 
